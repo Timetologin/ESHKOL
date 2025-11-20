@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { Play } from 'lucide-react'
 
 const VideoSection = () => {
   return (
@@ -39,7 +38,7 @@ const VideoSection = () => {
           </p>
         </motion.div>
 
-        {/* Video Container */}
+        {/* Video Container - Clean Autoplay Version */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -55,25 +54,13 @@ const VideoSection = () => {
               <div className="relative w-full overflow-hidden rounded-2xl shadow-2xl" style={{ paddingBottom: '56.25%' }}>
                 <iframe
                   className="absolute top-0 left-0 w-full h-full"
-                  src="https://player.vimeo.com/video/504354093?title=0&byline=0&portrait=0"
+                  src="https://player.vimeo.com/video/504354093?autoplay=1&loop=1&title=0&byline=0&portrait=0&controls=0&muted=1&background=1"
                   frameBorder="0"
                   allow="autoplay; fullscreen; picture-in-picture"
-                  allowFullScreen
                   title="אשכול - סרטון תדמית"
                 />
               </div>
             </div>
-
-            {/* Play Icon Overlay (decorative) */}
-            <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
-              className="absolute -bottom-6 -right-6 bg-accent-gold text-white p-6 rounded-full shadow-2xl"
-            >
-              <Play size={32} fill="white" />
-            </motion.div>
           </div>
         </motion.div>
 
