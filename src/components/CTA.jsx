@@ -1,13 +1,12 @@
 import { motion } from 'framer-motion'
-import { Phone, Mail, ArrowLeft } from 'lucide-react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Phone, ArrowLeft } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 const CTA = () => {
   const navigate = useNavigate()
 
   const handleContactClick = () => {
     navigate('/contact')
-    // גלילה לראש העמוד
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -109,13 +108,13 @@ const CTA = () => {
             </motion.button>
 
             <motion.a
-              href="tel:03-1234567"
+              href="tel:052-7847101"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="group bg-white/10 backdrop-blur-md border-2 border-white text-white px-12 py-6 rounded-2xl text-xl font-bold hover:bg-white hover:text-primary transition-all duration-300 flex items-center gap-4 cursor-pointer"
             >
               <Phone className="group-hover:rotate-12 transition-transform" size={24} />
-              התקשר: 03-1234567
+              התקשר: 052-7847101
             </motion.a>
           </motion.div>
 

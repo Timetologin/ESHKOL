@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Building2, Users, Award, TrendingUp } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const CompanyAbout = () => {
   const fadeInUp = {
@@ -98,19 +99,21 @@ const CompanyAbout = () => {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="mt-10"
             >
-              <motion.button
-                whileHover={{ scale: 1.05, x: -5 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-primary text-white px-10 py-4 rounded-lg text-lg font-bold shadow-lg hover:bg-primary-light transition-all duration-300 flex items-center gap-3"
-              >
-                קרא עוד אודותינו
-                <motion.span
-                  animate={{ x: [-3, 0, -3] }}
-                  transition={{ repeat: Infinity, duration: 1.5 }}
+              <Link to="/about">
+                <motion.button
+                  whileHover={{ scale: 1.05, x: -5 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-primary text-white px-10 py-4 rounded-lg text-lg font-bold shadow-lg hover:bg-primary-light transition-all duration-300 flex items-center gap-3"
                 >
-                  ←
-                </motion.span>
-              </motion.button>
+                  קרא עוד אודותינו
+                  <motion.span
+                    animate={{ x: [-3, 0, -3] }}
+                    transition={{ repeat: Infinity, duration: 1.5 }}
+                  >
+                    ←
+                  </motion.span>
+                </motion.button>
+              </Link>
             </motion.div>
           </motion.div>
 
