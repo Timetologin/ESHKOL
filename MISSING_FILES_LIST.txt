@@ -1,0 +1,11 @@
+רכיבים שחסרים:
+src/components/Stats.jsx
+src/components/CompanyValues.jsx
+src/components/Features.jsx
+src/components/ValueChain.jsx
+src/components/ProjectsMap.jsx
+src/components/CTA.jsx
+
+דפים שחסרים:
+src/pages/Projects.jsx
+src/pages/Contact.jsx
