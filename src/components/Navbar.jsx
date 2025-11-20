@@ -35,22 +35,21 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between">
-          {/* Logo - טקסטואלי */}
+          {/* Logo - תמונה */}
           <Link to="/">
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="flex flex-col items-start"
+              className="flex items-center"
             >
-              <span className={`text-3xl md:text-4xl font-bold transition-colors ${
-                isScrolled ? 'text-primary' : 'text-white'
-              }`}>
-                אשכול
-              </span>
-              <span className={`text-xs md:text-sm font-medium transition-colors ${
-                isScrolled ? 'text-accent-gold' : 'text-accent-gold'
-              }`}>
-                בונים באהבה
-              </span>
+              <img 
+                src="/eshkol-logo.png" 
+                alt="לוגו אשכול - בונים באהבה" 
+                className={`transition-all duration-300 ${
+                  isScrolled 
+                    ? 'h-12 md:h-14' 
+                    : 'h-14 md:h-16'
+                }`}
+              />
             </motion.div>
           </Link>
 
