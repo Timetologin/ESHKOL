@@ -19,7 +19,6 @@ const Navbar = () => {
     { title: 'דף הבית', path: '/' },
     { title: 'אודות', path: '/about' },
     { title: 'פרויקטים', path: '/projects' },
-    { title: 'צור קשר', path: '/contact' },
   ]
 
   return (
