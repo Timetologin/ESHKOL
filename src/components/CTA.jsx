@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion'
-import { Phone, ArrowLeft } from 'lucide-react'
+import { Phone } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+import EshkolButton from './EshkolButton'
 
 const CTA = () => {
   const navigate = useNavigate()
 
   const handleContactClick = () => {
-    navigate('/contact')
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.location.href = 'https://eshkol.co.il/form_check/'
   }
 
   const handleProjectsClick = () => {
@@ -97,16 +97,17 @@ const CTA = () => {
             transition={{ delay: 0.5 }}
             className="flex flex-col sm:flex-row gap-6 justify-center items-center"
           >
-            <motion.button
+            {/* כפתור ראשי עם EshkolButton */}
+            <EshkolButton
               onClick={handleContactClick}
-              whileHover={{ scale: 1.05, boxShadow: "0 25px 50px rgba(212, 175, 55, 0.4)" }}
-              whileTap={{ scale: 0.95 }}
-              className="group bg-accent-gold text-primary px-12 py-6 rounded-2xl text-xl font-bold shadow-2xl hover:bg-accent-gold/90 transition-all duration-300 flex items-center gap-4 cursor-pointer"
+              variant="secondary"
+              size="lg"
+              className="shadow-2xl"
             >
               צור קשר עכשיו
-              <ArrowLeft className="group-hover:-translate-x-2 transition-transform" size={24} />
-            </motion.button>
+            </EshkolButton>
 
+            {/* כפתור טלפון */}
             <motion.a
               href="tel:052-7847101"
               whileHover={{ scale: 1.05 }}
@@ -150,15 +151,14 @@ const CTA = () => {
             transition={{ delay: 0.7 }}
             className="mt-12"
           >
-            <motion.button
+            <EshkolButton
               onClick={handleProjectsClick}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="group bg-white/10 backdrop-blur-md border-2 border-white text-white px-10 py-4 rounded-xl text-lg font-bold hover:bg-white hover:text-primary transition-all duration-300 flex items-center gap-3 mx-auto cursor-pointer"
+              variant="outline"
+              size="md"
+              className="bg-white/10 backdrop-blur-md border-2 border-white text-white hover:bg-white hover:text-primary mx-auto"
             >
               הפרויקטים שלנו
-              <ArrowLeft className="group-hover:-translate-x-2 transition-transform" size={20} />
-            </motion.button>
+            </EshkolButton>
           </motion.div>
         </motion.div>
       </div>

@@ -1,7 +1,11 @@
 import { motion } from 'framer-motion'
-import { Leaf, Shield, Lightbulb, Users, Award, TrendingUp, Building, CheckCircle } from 'lucide-react'
+import { Leaf, Shield, Lightbulb, Users, Award, TrendingUp, Building } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import EshkolButton from './EshkolButton'
 
 const Features = () => {
+  const navigate = useNavigate()
+  
   const features = [
     {
       icon: Leaf,
@@ -66,6 +70,12 @@ const Features = () => {
         ease: "easeOut"
       }
     }
+  }
+
+  // פונקציה למעבר לדף טופס שירות לקוחות
+  const handleFormRedirect = () => {
+    navigate('/customer-service-form')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (
@@ -159,7 +169,7 @@ const Features = () => {
           ))}
         </motion.div>
 
-        {/* Bottom CTA */}
+        {/* Bottom CTA עם EshkolButton */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -167,14 +177,13 @@ const Features = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="text-center mt-20"
         >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-primary to-primary-light text-white px-12 py-5 rounded-xl text-xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 inline-flex items-center gap-3"
+          <EshkolButton 
+            onClick={handleFormRedirect}
+            variant="primary"
+            size="lg"
           >
-            <CheckCircle size={24} />
-            בואו נדבר על הפרויקט שלכם
-          </motion.button>
+            למילוי טופס שירות לקוחות
+          </EshkolButton>
         </motion.div>
       </div>
     </section>
