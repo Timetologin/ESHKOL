@@ -40,7 +40,7 @@ const Footer = () => {
               <img 
                 src="/eshkol-logo.png" 
                 alt="לוגו אשכול - בונים באהבה" 
-                className="h-16 w-auto mb-4"
+                className="h-[70px] w-auto mb-4"
               />
             </div>
             

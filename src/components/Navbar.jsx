@@ -46,8 +46,8 @@ const Navbar = () => {
                 alt="לוגו אשכול - בונים באהבה" 
                 className={`transition-all duration-300 ${
                   isScrolled 
-                    ? 'h-12 md:h-14' 
-                    : 'h-14 md:h-16'
+                    ? 'h-[52px] md:h-[61px]' 
+                    : 'h-[61px] md:h-[70px]'
                 }`}
               />
             </motion.div>
