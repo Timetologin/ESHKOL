@@ -218,7 +218,7 @@ const CustomerServiceForm = () => {
               {/* שם הדייר */}
               <div>
                 <label className="block text-right text-base font-medium text-gray-700 mb-2">
-                  שם הדייר*
+                  *שם הדייר
                 </label>
                 <input
                   type="text"
@@ -237,7 +237,7 @@ const CustomerServiceForm = () => {
               {/* דואר אלקטרוני */}
               <div>
                 <label className="block text-right text-base font-medium text-gray-700 mb-2">
-                  דואר אלקטרוני*
+                  דואר אלקטרוני
                 </label>
                 <input
                   type="email"
@@ -256,7 +256,7 @@ const CustomerServiceForm = () => {
               {/* שם הפרויקט */}
               <div>
                 <label className="block text-right text-base font-medium text-gray-700 mb-2">
-                  שם הפרויקט*
+                  *שם הפרויקט
                 </label>
                 <input
                   type="text"
@@ -275,7 +275,7 @@ const CustomerServiceForm = () => {
               {/* תאריך איכלוס */}
               <div>
                 <label className="block text-right text-base font-medium text-gray-700 mb-2">
-                  תאריך איכלוס*
+                  *תאריך איכלוס
                 </label>
                 <input
                   type="date"
@@ -294,7 +294,7 @@ const CustomerServiceForm = () => {
               {/* כתובת */}
               <div>
                 <label className="block text-right text-base font-medium text-gray-700 mb-2">
-                  כתובת*
+                  *כתובת
                 </label>
                 <input
                   type="text"
@@ -308,7 +308,7 @@ const CustomerServiceForm = () => {
               {/* קומה */}
               <div>
                 <label className="block text-right text-base font-medium text-gray-700 mb-2">
-                  קומה*
+                  *קומה
                 </label>
                 <input
                   type="text"
@@ -322,7 +322,7 @@ const CustomerServiceForm = () => {
               {/* מס' דירה */}
               <div>
                 <label className="block text-right text-base font-medium text-gray-700 mb-2">
-                  מס' דירה*
+                  *מס' דירה
                 </label>
                 <input
                   type="text"
@@ -336,7 +336,7 @@ const CustomerServiceForm = () => {
               {/* טלפון ליצירת קשר */}
               <div>
                 <label className="block text-right text-base font-medium text-gray-700 mb-2">
-                  טלפון ליצירת קשר*
+                  *טלפון לתיאום 
                 </label>
                 <input
                   type="tel"
@@ -367,7 +367,7 @@ const CustomerServiceForm = () => {
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:outline-none transition-colors text-right bg-white appearance-none"
                       style={{ backgroundImage: "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e\")", backgroundPosition: "left 0.5rem center", backgroundRepeat: "no-repeat", backgroundSize: "1.5em 1.5em" }}
                     >
-                      <option value="">הוספת ליקויי 1</option>
+                      <option value="">בחר אופציה</option>
                       <option value="add">הוספת ליקויי 1</option>
                     </select>
 
@@ -457,7 +457,7 @@ const CustomerServiceForm = () => {
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:outline-none transition-colors text-right bg-white appearance-none"
                       style={{ backgroundImage: "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e\")", backgroundPosition: "left 0.5rem center", backgroundRepeat: "no-repeat", backgroundSize: "1.5em 1.5em" }}
                     >
-                      <option value="">הוספת ליקויי 2</option>
+                      <option value="">בחר אופציה</option>
                       <option value="add">הוספת ליקויי 2</option>
                     </select>
 
@@ -540,7 +540,7 @@ const CustomerServiceForm = () => {
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:outline-none transition-colors text-right bg-white appearance-none"
                       style={{ backgroundImage: "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e\")", backgroundPosition: "left 0.5rem center", backgroundRepeat: "no-repeat", backgroundSize: "1.5em 1.5em" }}
                     >
-                      <option value="">הוספת ליקוי 3</option>
+                      <option value="">בחר אופציה</option>
                       <option value="add">הוספת ליקוי 3</option>
                     </select>
 
