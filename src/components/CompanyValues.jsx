@@ -1,210 +1,186 @@
 import { motion } from 'framer-motion'
-import { Shield, Award, Users, Heart, Lightbulb, TrendingUp } from 'lucide-react'
+import { Shield, Award, Heart, Sparkles } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 const CompanyValues = () => {
+  const navigate = useNavigate()
+  
   const values = [
     {
       icon: Shield,
       title: "אחריות",
-      description: "אנו פועלים באווירה חיובית, תוך עמידה בכל היעדים ואי פשרות על איכות. ניסיון רב והישגיות הם ערכים מרכזיים עבורנו, ולכן אכפת לנו להוביל את כל המהלכים בצורה הטובה ביותר עבור לקוחותינו. אנו מאמינים בהשקעה מלאה, במתן אוזן קשבת וביצירת אמון לאורך כל הדרך. בזכות זאת אנו מצליחים לפתח ולקדם כל פרויקט תוך עמידה בלוחות הזמנים וקבלת התוצאות הטובות ביותר.",
-      color: "from-blue-400 to-blue-600"
+      description: "אחריות מלאה על כל שלבי הפרויקט, מהתכנון ועד המסירה הסופית",
+      color: "bg-blue-500",
+      lightBg: "bg-blue-50",
+      lineColor: "bg-blue-500"
     },
     {
       icon: Award,
       title: "מקצועיות",
-      description: "אנו מאמינים בחובתנו לחתור למצוינות, בהצגת תכנון מדויק והליך קבלת החלטות חכם ומתקדם. היכולת לנהל תהליכים מורכבים בצורה ברורה ולא מתפשרת כדי שתוכלו להיות רגועים ובטוחים שהפרויקט שלכם יתקדם בצורה מיטבית ויעילה.",
-      color: "from-purple-400 to-purple-600"
+      description: "צוות מקצועי ומנוסה עם למעלה מ-25 שנות ניסיון בתחום",
+      color: "bg-yellow-500",
+      lightBg: "bg-yellow-50",
+      lineColor: "bg-yellow-500"
     },
     {
-      icon: Lightbulb,
-      title: "חדשנות",
-      description: "אנו מתבססים על חשיבה חדשנית ויצירתית לייצור מוצרים איכותיים, יעילים ותומכים. משימתנו לייצר פתרונות חדשים ומתקדמים המתאימים לאתגרים, לשוק ולשינויים הטכנולוגיים. החברה מחויבת ליצירתיות, בחשיבה מחוץ לקופסה ובחיפוש אחר תהליכים חדשים ומתקדמים. בזכות חשיבה יצירתית זו אנו מספקים פתרונות נוספים שמותאמים לכל לקוח ולכל פרויקט ומסייעים בהצלחת המיזמים.",
-      color: "from-yellow-400 to-orange-500"
-    },
-    {
-      icon: Users,
+      icon: Heart,
       title: "שירות",
-      description: "לקוחות מרוצים הם בסיס לכל מערכת עסקית מוצלחת שלנו. אנו דואגים כי אתם תיהנו מהשירות המקצועי ביותר, תוך זמינות מלאה, אכפתיות ומתן מענה מהיר ומדויק. היחס שאתם מקבלים הוא אישי, נעים ומקצועי, והינו חלק בלתי נפרד מהמחויבות שלנו להעניק ללקוחות חוויית שירות ברמה הגבוהה ביותר.",
-      color: "from-green-400 to-emerald-600"
+      description: "שירות אישי ומסור עם דגש על יחס אישי ותקשורת שוטפת",
+      color: "bg-pink-500",
+      lightBg: "bg-pink-50",
+      lineColor: "bg-pink-500"
     },
     {
-      icon: TrendingUp,
-      title: "יזמות",
-      description: "אנו מתמודדים בסביבה העסקית המאתגרת ומשתמשים בידע הנצבר לשאת את הדגל. שאיפת הלמידה המתמדת שלנו והתפתחות החברה תומכת תמיד בתהליכי יזמות, פתיחות לשינויים, מיקוד ביעדים והסתכלות קדימה לטובת צמיחה חיובית ויצירת פתרונות פורצי דרך שיהיו לשירות לקוחותינו בצורה מיטבית.",
-      color: "from-teal-400 to-cyan-600"
+      icon: Sparkles,
+      title: "נגיעה אישית",
+      description: "כל פרויקט מקבל תשומת לב מיוחדת והתאמה אישית מלאה",
+      color: "bg-purple-500",
+      lightBg: "bg-purple-50",
+      lineColor: "bg-purple-500"
     }
   ]
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-gray-50">
-      <div className="container mx-auto px-6">
+    <section className="py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+      {/* Background decorative circles */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gray-100 rounded-full opacity-50" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gray-100 rounded-full opacity-50" />
+        <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-gray-100 rounded-full opacity-30" />
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-7xl mx-auto"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
         >
-          {/* Header */}
-          <div className="text-center mb-16">
-            <motion.span
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="inline-block bg-primary/10 text-primary px-6 py-2 rounded-full font-bold text-lg mb-6"
-            >
-              ערכים מובילים
-            </motion.span>
-            
-            <h2 className="text-5xl md:text-6xl font-bold text-primary mb-6">
-              הערכים שמנחים אותנו
-            </h2>
-            
-            <div className="h-1 w-32 bg-accent-gold mx-auto" />
-          </div>
+          <motion.span
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="inline-block text-primary font-bold text-lg mb-4"
+          >
+            הערכים שלנו
+          </motion.span>
+          
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-4">
+            מה שמניע אותנו
+          </h2>
+          
+          <motion.span
+            animate={{
+              backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+            }}
+            transition={{ duration: 5, repeat: Infinity }}
+            className="block text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-primary via-accent-gold to-primary bg-clip-text text-transparent bg-[length:200%_auto]"
+          >
+            קדימה
+          </motion.span>
+          
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="h-1 w-24 bg-accent-gold mx-auto mt-8"
+          />
+          
+          <p className="text-lg md:text-xl text-gray-600 mt-6 max-w-2xl mx-auto">
+            ארבעה ערכי ליבה שמגדירים את הדרך שלנו לבנות ולהוביל פרויקטים
+          </p>
+        </motion.div>
 
-          {/* Values Grid - 2 columns layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {/* Right Column */}
-            <div className="space-y-8">
-              {/* אחריות */}
+        {/* Values Grid - 4 cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          {values.map((value, index) => {
+            const Icon = value.icon
+            return (
               <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0 }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: index * 0.15,
+                  type: "spring",
+                  stiffness: 100
+                }}
+                whileHover={{ 
+                  y: -15,
+                  scale: 1.03,
+                  transition: { duration: 0.3 }
+                }}
+                className="group relative"
               >
-                <motion.div
-                  whileHover={{ rotate: 360, scale: 1.1 }}
-                  transition={{ duration: 0.6 }}
-                  className={`w-16 h-16 rounded-xl bg-gradient-to-br ${values[0].color} flex items-center justify-center mb-6 shadow-lg`}
-                >
-                  {(() => {
-                    const Icon = values[0].icon
-                    return <Icon className="text-white" size={32} />
-                  })()}
-                </motion.div>
-                <h3 className="text-2xl font-bold text-primary mb-4 group-hover:text-primary-light transition-colors">
-                  {values[0].title}
-                </h3>
-                <p className="text-gray-700 leading-relaxed text-lg">
-                  {values[0].description}
-                </p>
-              </motion.div>
+                {/* Card */}
+                <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 h-full relative overflow-hidden">
+                  
+                  {/* Hover background effect */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 0.05 }}
+                    className={`absolute inset-0 ${value.color}`}
+                  />
+                  
+                  {/* Icon */}
+                  <motion.div
+                    whileHover={{ 
+                      rotate: [0, -10, 10, -10, 0],
+                      scale: 1.1
+                    }}
+                    transition={{ duration: 0.5 }}
+                    className={`w-14 h-14 ${value.color} rounded-xl flex items-center justify-center mb-6 shadow-lg`}
+                  >
+                    <Icon className="text-white" size={28} />
+                  </motion.div>
 
-              {/* שירות */}
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
-              >
-                <motion.div
-                  whileHover={{ rotate: 360, scale: 1.1 }}
-                  transition={{ duration: 0.6 }}
-                  className={`w-16 h-16 rounded-xl bg-gradient-to-br ${values[3].color} flex items-center justify-center mb-6 shadow-lg`}
-                >
-                  {(() => {
-                    const Icon = values[3].icon
-                    return <Icon className="text-white" size={32} />
-                  })()}
-                </motion.div>
-                <h3 className="text-2xl font-bold text-primary mb-4 group-hover:text-primary-light transition-colors">
-                  {values[3].title}
-                </h3>
-                <p className="text-gray-700 leading-relaxed text-lg">
-                  {values[3].description}
-                </p>
-              </motion.div>
-            </div>
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-primary mb-3 group-hover:text-primary-light transition-colors">
+                    {value.title}
+                  </h3>
 
-            {/* Left Column */}
-            <div className="space-y-8">
-              {/* מקצועיות */}
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
-              >
-                <motion.div
-                  whileHover={{ rotate: 360, scale: 1.1 }}
-                  transition={{ duration: 0.6 }}
-                  className={`w-16 h-16 rounded-xl bg-gradient-to-br ${values[1].color} flex items-center justify-center mb-6 shadow-lg`}
-                >
-                  {(() => {
-                    const Icon = values[1].icon
-                    return <Icon className="text-white" size={32} />
-                  })()}
-                </motion.div>
-                <h3 className="text-2xl font-bold text-primary mb-4 group-hover:text-primary-light transition-colors">
-                  {values[1].title}
-                </h3>
-                <p className="text-gray-700 leading-relaxed text-lg">
-                  {values[1].description}
-                </p>
-              </motion.div>
+                  {/* Description */}
+                  <p className="text-gray-600 leading-relaxed text-sm mb-6">
+                    {value.description}
+                  </p>
 
-              {/* חדשנות */}
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
-              >
-                <motion.div
-                  whileHover={{ rotate: 360, scale: 1.1 }}
-                  transition={{ duration: 0.6 }}
-                  className={`w-16 h-16 rounded-xl bg-gradient-to-br ${values[2].color} flex items-center justify-center mb-6 shadow-lg`}
-                >
-                  {(() => {
-                    const Icon = values[2].icon
-                    return <Icon className="text-white" size={32} />
-                  })()}
-                </motion.div>
-                <h3 className="text-2xl font-bold text-primary mb-4 group-hover:text-primary-light transition-colors">
-                  {values[2].title}
-                </h3>
-                <p className="text-gray-700 leading-relaxed text-lg">
-                  {values[2].description}
-                </p>
+                  {/* Bottom line */}
+                  <motion.div
+                    initial={{ scaleX: 0.3 }}
+                    whileHover={{ scaleX: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className={`h-1 w-16 ${value.lineColor} rounded-full origin-right`}
+                  />
+                </div>
               </motion.div>
+            )
+          })}
+        </div>
 
-              {/* יזמות */}
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
-              >
-                <motion.div
-                  whileHover={{ rotate: 360, scale: 1.1 }}
-                  transition={{ duration: 0.6 }}
-                  className={`w-16 h-16 rounded-xl bg-gradient-to-br ${values[4].color} flex items-center justify-center mb-6 shadow-lg`}
-                >
-                  {(() => {
-                    const Icon = values[4].icon
-                    return <Icon className="text-white" size={32} />
-                  })()}
-                </motion.div>
-                <h3 className="text-2xl font-bold text-primary mb-4 group-hover:text-primary-light transition-colors">
-                  {values[4].title}
-                </h3>
-                <p className="text-gray-700 leading-relaxed text-lg">
-                  {values[4].description}
-                </p>
-              </motion.div>
-            </div>
-          </div>
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+          className="text-center mt-16"
+        >
+          <p className="text-lg text-gray-600 mb-6">
+            רוצים לראות איך הערכים שלנו מתבטאים בפועל?
+          </p>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/projects')}
+            className="bg-gradient-to-r from-primary to-primary-light text-white px-10 py-4 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+          >
+            גלה את הפרויקטים שלנו
+          </motion.button>
         </motion.div>
       </div>
     </section>
