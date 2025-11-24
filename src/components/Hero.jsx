@@ -1,9 +1,12 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ChevronDown, ArrowLeft } from 'lucide-react'
 import { useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Hero = () => {
   const ref = useRef(null)
+  const navigate = useNavigate()
+  
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"]
@@ -11,6 +14,11 @@ const Hero = () => {
 
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0])
+
+  const handleProjectsClick = () => {
+    navigate('/projects')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   return (
     <div ref={ref} className="relative h-screen overflow-hidden">
@@ -60,28 +68,20 @@ const Hero = () => {
           מתמחים בייזום וביצוע של פרויקטים למגורים תוך שימוש בטכנולוגיה המתקדמת ביותר
         </motion.p>
 
-        {/* CTA Buttons */}
+        {/* CTA Button - Only Projects */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex flex-col sm:flex-row gap-6"
         >
           <motion.button
+            onClick={handleProjectsClick}
             whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(212, 175, 55, 0.3)" }}
             whileTap={{ scale: 0.95 }}
             className="bg-accent-gold text-white px-10 py-5 rounded-lg text-xl font-bold shadow-2xl hover:bg-accent-gold/90 transition-all duration-300 flex items-center gap-3 justify-center group"
           >
             הפרויקטים שלנו
-            <ArrowLeft className="group-hover:translate-x-2 transition-transform" size={24} />
-          </motion.button>
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="border-2 border-white text-white px-10 py-5 rounded-lg text-xl font-bold hover:bg-white hover:text-primary transition-all duration-300"
-          >
-            צור קשר
+            <ArrowLeft className="group-hover:-translate-x-2 transition-transform" size={24} />
           </motion.button>
         </motion.div>
 
