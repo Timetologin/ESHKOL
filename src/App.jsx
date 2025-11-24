@@ -7,7 +7,7 @@ import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import CustomerService from './pages/CustomerService';
+import CustomerService from './pages/CustomerServiceForm';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
