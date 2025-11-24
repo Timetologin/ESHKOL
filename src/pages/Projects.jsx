@@ -180,6 +180,7 @@ const FilterButton = ({ status, isActive, onClick, count }) => (
 );
 
 const Projects = () => {
+  const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState('all');
   const statuses = getAllStatuses();
   
@@ -187,6 +188,12 @@ const Projects = () => {
     if (activeFilter === 'all') return projectsData;
     return projectsData.filter(project => project.status === activeFilter);
   }, [activeFilter]);
+
+  // פונקציה לניווט לדף צור קשר
+  const handleContactClick = () => {
+    navigate('/contact');
+    window.scrollTo(0, 0);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 relative overflow-hidden">
@@ -273,7 +280,7 @@ const Projects = () => {
           </motion.div>
         )}
 
-        {/* CTA */}
+        {/* CTA - מתוקן! ניווט פנימי לדף צור קשר */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -281,17 +288,15 @@ const Projects = () => {
           className="text-center mt-16"
         >
           <p className="text-gray-600 mb-4">מעוניינים לשמוע עוד על הפרויקטים שלנו?</p>
-          <motion.a
-            href="https://eshkol.co.il/form_check/"
-            target="_blank"
-            rel="noopener noreferrer"
+          <motion.button
+            onClick={handleContactClick}
             className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-medium hover:bg-primary-light transition-colors shadow-lg"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             <span>צור קשר</span>
             <ArrowLeft className="w-5 h-5" />
-          </motion.a>
+          </motion.button>
         </motion.div>
       </div>
     </div>

@@ -16,8 +16,13 @@ export const projectsData = [
     buildings: 3,
     floors: 8,
     apartmentTypes: '3-5 חדרים',
-    mainImage: 'https://eshkol.co.il/wp-content/uploads/2025/05/WhatsApp-Video-2025-05-05-at-14.04.59.mp4',
+    mainImage: 'https://eshkol.co.il/wp-content/uploads/2021/11/1977_apt_13_002f-scaled.jpg',
     images: [
+      'https://eshkol.co.il/wp-content/uploads/2021/11/1977_apt_13_002f-scaled.jpg',
+      'https://eshkol.co.il/wp-content/uploads/2021/11/1977_apt_13_001f-scaled.jpg',
+      'https://eshkol.co.il/wp-content/uploads/2019/04/WhatsApp-Image-2024-11-25-at-14.36.09.jpeg',
+      'https://eshkol.co.il/wp-content/uploads/2019/04/jpg11_compressed-1.jpg',
+      'https://eshkol.co.il/wp-content/uploads/2019/04/jpg10_compressed.jpg',
       'https://eshkol.co.il/wp-content/uploads/2019/04/2.png'
     ],
     floorPlans: [
