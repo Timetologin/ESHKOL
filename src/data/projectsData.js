@@ -23,6 +23,7 @@ export const projectsData = [
       'https://eshkol.co.il/wp-content/uploads/2019/04/WhatsApp-Image-2024-11-25-at-14.36.09.jpeg',
       'https://eshkol.co.il/wp-content/uploads/2019/04/jpg11_compressed-1.jpg',
       'https://eshkol.co.il/wp-content/uploads/2019/04/jpg10_compressed.jpg',
+      'https://eshkol.co.il/wp-content/uploads/2019/04/2.png'
     ],
     floorPlans: [
       { name: 'קומות 2-6', image: 'https://eshkol.co.il/wp-content/uploads/2019/04/2.png' },

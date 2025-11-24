@@ -1,3 +1,4 @@
+// EshkolButton.jsx - קומפוננטת כפתור אחידה לכל האתר עם לוגו אשכול מונפש
 import { motion } from 'framer-motion'
 
 /**
@@ -23,7 +24,7 @@ const EshkolButton = ({
   // סוגי כפתורים שונים
   const variants = {
     primary: 'bg-gradient-to-r from-primary to-primary-light text-white hover:shadow-2xl',
-    secondary: 'bg-accent-gold text-primary hover:bg-accent-gold/90 hover:shadow-2xl',
+    secondary: 'bg-accent-gold text-white hover:bg-accent-gold/90 hover:shadow-2xl',
     outline: 'bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white',
     white: 'bg-white text-primary hover:bg-gray-50 hover:shadow-2xl'
   }
@@ -53,7 +54,7 @@ const EshkolButton = ({
         ${sizes[size]}
         rounded-xl font-bold 
         shadow-xl transition-all duration-300 
-        inline-flex items-center gap-3 
+        inline-flex items-center gap-3 justify-center
         ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
         ${className}
       `}

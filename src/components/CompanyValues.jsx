@@ -1,52 +1,55 @@
+// CompanyValues.jsx - ערכי החברה עם כפתור לצור קשר (לא לפרויקטים)
 import { motion } from 'framer-motion'
-import { Shield, Award, Heart, Sparkles } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+import { Shield, Users, Award, Lightbulb } from 'lucide-react'
+import EshkolButton from './EshkolButton'
 
 const CompanyValues = () => {
   const navigate = useNavigate()
-  
+
   const values = [
     {
       icon: Shield,
-      title: "אחריות",
-      description: "אחריות מלאה על כל שלבי הפרויקט, מהתכנון ועד המסירה הסופית",
-      color: "bg-blue-500",
-      lightBg: "bg-blue-50",
-      lineColor: "bg-blue-500"
+      title: 'אחריות',
+      description: 'אנו לוקחים אחריות מלאה על כל פרויקט, מהתכנון ועד המסירה. עומדים מאחורי כל התחייבות.',
+      color: 'bg-gradient-to-br from-blue-500 to-blue-600',
+      lineColor: 'bg-blue-500'
+    },
+    {
+      icon: Users,
+      title: 'מקצועיות',
+      description: 'צוות מומחים עם עשרות שנות ניסיון בתחום הבנייה והנדל"ן, המביאים ידע וניסיון לכל פרויקט.',
+      color: 'bg-gradient-to-br from-green-500 to-green-600',
+      lineColor: 'bg-green-500'
     },
     {
       icon: Award,
-      title: "מקצועיות",
-      description: "צוות מקצועי ומנוסה עם למעלה מ-25 שנות ניסיון בתחום",
-      color: "bg-yellow-500",
-      lightBg: "bg-yellow-50",
-      lineColor: "bg-yellow-500"
+      title: 'איכות',
+      description: 'סטנדרטים גבוהים ללא פשרות. שימוש בחומרים מהאיכות הגבוהה ביותר ובקרת איכות קפדנית.',
+      color: 'bg-gradient-to-br from-accent-gold to-yellow-500',
+      lineColor: 'bg-accent-gold'
     },
     {
-      icon: Heart,
-      title: "שירות",
-      description: "שירות אישי ומסור עם דגש על יחס אישי ותקשורת שוטפת",
-      color: "bg-pink-500",
-      lightBg: "bg-pink-50",
-      lineColor: "bg-pink-500"
-    },
-    {
-      icon: Sparkles,
-      title: "נגיעה אישית",
-      description: "כל פרויקט מקבל תשומת לב מיוחדת והתאמה אישית מלאה",
-      color: "bg-purple-500",
-      lightBg: "bg-purple-50",
-      lineColor: "bg-purple-500"
+      icon: Lightbulb,
+      title: 'חדשנות',
+      description: 'תמיד בחזית הטכנולוגיה עם פתרונות בנייה ירוקה, חכמה ובת-קיימא לעתיד טוב יותר.',
+      color: 'bg-gradient-to-br from-purple-500 to-purple-600',
+      lineColor: 'bg-purple-500'
     }
   ]
 
+  // כפתור לצור קשר - לא לפרויקטים (כדי למנוע כפילויות)
+  const handleContactClick = () => {
+    navigate('/contact')
+    window.scrollTo(0, 0)
+  }
+
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
-      {/* Background decorative circles */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gray-100 rounded-full opacity-50" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gray-100 rounded-full opacity-50" />
-        <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-gray-100 rounded-full opacity-30" />
+    <section className="py-24 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+      {/* Background Decorations */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent-gold/5 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -58,36 +61,20 @@ const CompanyValues = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <motion.span
+          <motion.span 
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-block text-primary font-bold text-lg mb-4"
+            className="inline-block bg-primary/10 text-primary px-6 py-2 rounded-full font-semibold mb-6"
           >
             הערכים שלנו
           </motion.span>
           
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-4">
-            מה שמניע אותנו
+          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+            מה מנחה אותנו?
           </h2>
           
-          <motion.span
-            animate={{
-              backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-            }}
-            transition={{ duration: 5, repeat: Infinity }}
-            className="block text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-primary via-accent-gold to-primary bg-clip-text text-transparent bg-[length:200%_auto]"
-          >
-            קדימה
-          </motion.span>
-          
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="h-1 w-24 bg-accent-gold mx-auto mt-8"
-          />
+          <div className="w-24 h-1 bg-accent-gold mx-auto mb-6" />
           
           <p className="text-lg md:text-xl text-gray-600 mt-6 max-w-2xl mx-auto">
             ארבעה ערכי ליבה שמגדירים את הדרך שלנו לבנות ולהוביל פרויקטים
@@ -162,7 +149,7 @@ const CompanyValues = () => {
           })}
         </div>
 
-        {/* CTA */}
+        {/* CTA - לצור קשר, לא לפרויקטים */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -171,16 +158,15 @@ const CompanyValues = () => {
           className="text-center mt-16"
         >
           <p className="text-lg text-gray-600 mb-6">
-            רוצים לראות איך הערכים שלנו מתבטאים בפועל?
+            רוצים לדעת עוד על הדרך שלנו לעבוד?
           </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/projects')}
-            className="bg-gradient-to-r from-primary to-primary-light text-white px-10 py-4 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+          <EshkolButton
+            onClick={handleContactClick}
+            variant="primary"
+            size="lg"
           >
-            גלה את הפרויקטים שלנו
-          </motion.button>
+            דברו איתנו
+          </EshkolButton>
         </motion.div>
       </div>
     </section>

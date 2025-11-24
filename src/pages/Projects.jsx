@@ -1,9 +1,10 @@
-// Projects.jsx - עמוד הפרויקטים הראשי
+// Projects.jsx - עמוד הפרויקטים הראשי עם EshkolButton
 import React, { useState, useMemo } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { MapPin, Home, Building2, ArrowLeft, Play } from 'lucide-react';
 import { projectsData, getAllStatuses } from '../data/projectsData';
+import EshkolButton from '../components/EshkolButton';
 
 // קומפוננטת כרטיס פרויקט עם אפקט 3D
 const ProjectCard = ({ project, index }) => {
@@ -189,7 +190,7 @@ const Projects = () => {
     return projectsData.filter(project => project.status === activeFilter);
   }, [activeFilter]);
 
-  // פונקציה לניווט לדף צור קשר
+  // פונקציה לניווט לדף צור קשר - קישור פנימי!
   const handleContactClick = () => {
     navigate('/contact');
     window.scrollTo(0, 0);
@@ -236,6 +237,7 @@ const Projects = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
             בונים את העתיד
           </h1>
+          <div className="w-24 h-1 bg-accent-gold mx-auto mb-4" />
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             הפרויקטים שלנו משלבים איכות, חדשנות ועיצוב מודרני
           </p>
@@ -280,23 +282,21 @@ const Projects = () => {
           </motion.div>
         )}
 
-        {/* CTA - מתוקן! ניווט פנימי לדף צור קשר */}
+        {/* CTA - עם EshkolButton וקישור פנימי */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
           className="text-center mt-16"
         >
-          <p className="text-gray-600 mb-4">מעוניינים לשמוע עוד על הפרויקטים שלנו?</p>
-          <motion.button
+          <p className="text-gray-600 mb-6">מעוניינים לשמוע עוד על הפרויקטים שלנו?</p>
+          <EshkolButton
             onClick={handleContactClick}
-            className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-medium hover:bg-primary-light transition-colors shadow-lg"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            variant="primary"
+            size="lg"
           >
-            <span>צור קשר</span>
-            <ArrowLeft className="w-5 h-5" />
-          </motion.button>
+            צור קשר
+          </EshkolButton>
         </motion.div>
       </div>
     </div>

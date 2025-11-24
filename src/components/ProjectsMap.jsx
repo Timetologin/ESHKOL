@@ -1,80 +1,82 @@
+// ProjectsMap.jsx - מפת פרויקטים עם כפתור לצור קשר
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { useState, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { MapPin, Home, Calendar, ArrowLeft } from 'lucide-react'
+import EshkolButton from './EshkolButton'
 
 const ProjectsMap = () => {
+  const navigate = useNavigate()
   const [filter, setFilter] = useState('all')
 
-  // פרויקטים - תחליף בנתונים אמיתיים שלך
+  // פרויקטים מובחרים לתצוגה בדף הבית
   const projects = [
     {
       id: 1,
-      title: "פרויקט דגל - תל אביב",
+      title: "הדר יוסף",
       location: "תל אביב",
-      units: 120,
-      status: "בבנייה",
+      units: 72,
+      status: "בשיווק",
       completion: "2025",
-      image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80",
-      description: "פרויקט יוקרה בלב תל אביב עם נוף פתוח למרכז העיר"
+      image: "https://eshkol.co.il/wp-content/uploads/2021/11/1977_apt_13_002f-scaled.jpg",
+      description: "קומפלקס של 3 בניינים בני 8 קומות בשכונת הדר יוסף המתחדשת"
     },
     {
       id: 2,
-      title: "מתחם פי גלילות",
-      location: "פי גלילות",
-      units: 85,
-      status: "נמכר",
-      completion: "2024",
-      image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80",
-      description: "מתחם דירות יוקרה בצפון הארץ עם נוף לגליל"
+      title: "הכינור על הפארק",
+      location: "הרצליה",
+      units: null,
+      status: "בשיווק",
+      completion: "2025",
+      image: "https://eshkol.co.il/wp-content/uploads/2023/09/WhatsApp-Image-2023-09-04-at-14.19.17-2.jpeg",
+      description: "פרויקט יוקרה בקו הראשון לפארק גליל ים"
     },
     {
       id: 3,
-      title: "פרויקט הכרמל",
-      location: "חיפה",
-      units: 65,
-      status: "בתכנון",
+      title: "עמינדב",
+      location: "תל אביב",
+      units: null,
+      status: "בשיווק",
       completion: "2026",
-      image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
-      description: "בניין בוטיק על הכרמל עם נוף מדהים לים"
+      image: "https://eshkol.co.il/wp-content/uploads/2024/11/3.jpg",
+      description: "מתחם מגורים חדש ליד פארק שדרות ההשכלה"
     },
     {
       id: 4,
-      title: "מגדלי הים",
-      location: "נתניה",
-      units: 200,
-      status: "בשיווק",
-      completion: "2026",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
-      description: "שני מגדלי יוקרה על קו החוף הראשון"
+      title: "גליל ים 360",
+      location: "הרצליה",
+      units: 38,
+      status: "בביצוע",
+      completion: "2025",
+      image: "https://eshkol.co.il/wp-content/uploads/2021/07/C1_night.jpg",
+      description: "38 דירות יוקרה עם 360 מעלות של נוף"
     },
     {
       id: 5,
-      title: "שכונת העתיד",
-      location: "באר שבע",
-      units: 340,
-      status: "בבנייה",
+      title: "הראב\"ע 5",
+      location: "רמת גן",
+      units: 19,
+      status: "בשיווק",
       completion: "2025",
-      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80",
-      description: "פרויקט התחדשות עירונית מקיף בדרום"
+      image: "https://eshkol.co.il/wp-content/uploads/2021/02/%D7%94%D7%A8%D7%90%D7%91%D7%A2-5-.jpeg",
+      description: "בניין בוטיק בן 7 קומות עם 19 דירות מפנקות"
     },
     {
       id: 6,
-      title: "מרכז העיר",
-      location: "ירושלים",
-      units: 95,
-      status: "בתכנון",
-      completion: "2027",
-      image: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80",
-      description: "פרויקט יוקרה במרכז העיר העתיקה"
+      title: "אבן שפרוט",
+      location: "הרצליה",
+      units: null,
+      status: "בביצוע",
+      completion: "2025",
+      image: "https://eshkol.co.il/wp-content/uploads/2022/04/WhatsApp-Image-2022-04-04-at-13.20.06-1.jpg",
+      description: "שני בניינים בני 7 קומות במיקום מנצח"
     }
   ]
 
   const filters = [
     { id: 'all', label: 'הכל' },
-    { id: 'בבנייה', label: 'בבנייה' },
     { id: 'בשיווק', label: 'בשיווק' },
-    { id: 'בתכנון', label: 'בתכנון' },
-    { id: 'נמכר', label: 'נמכר' }
+    { id: 'בביצוע', label: 'בביצוע' }
   ]
 
   const filteredProjects = filter === 'all' 
@@ -82,61 +84,62 @@ const ProjectsMap = () => {
     : projects.filter(p => p.status === filter)
 
   const statusColors = {
-    'בבנייה': 'bg-blue-500',
     'בשיווק': 'bg-green-500',
-    'בתכנון': 'bg-yellow-500',
-    'נמכר': 'bg-gray-500'
+    'בביצוע': 'bg-yellow-500',
+    'מאוכלס': 'bg-gray-500'
+  }
+
+  // כפתור לדף פרויקטים המלא
+  const handleViewAllClick = () => {
+    navigate('/projects')
+    window.scrollTo(0, 0)
+  }
+
+  // כפתור לצור קשר
+  const handleContactClick = () => {
+    navigate('/contact')
+    window.scrollTo(0, 0)
   }
 
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-50 via-white to-gray-50 relative overflow-hidden">
-      {/* Background dots pattern */}
-      <div className="absolute inset-0 pointer-events-none opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle, #1a3a52 1px, transparent 1px)`,
-          backgroundSize: '30px 30px'
-        }} />
+    <section className="py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute -top-40 -left-40 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute -bottom-40 -right-40 w-80 h-80 bg-accent-gold/5 rounded-full blur-3xl"
+          animate={{ scale: [1.2, 1, 1.2], opacity: [0.5, 0.3, 0.5] }}
+          transition={{ duration: 10, repeat: Infinity }}
+        />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        {/* Header - בונים את העתיד */}
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <motion.span
+          <motion.span 
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-block text-primary/70 font-medium text-lg mb-4"
+            className="inline-block bg-primary/10 text-primary px-6 py-2 rounded-full font-semibold mb-6"
           >
-            הפרויקטים שלנו
+            פרויקטים נבחרים
           </motion.span>
           
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-primary mb-2">
-            בונים את
+          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+            הפרויקטים שלנו
           </h2>
           
-          <motion.span
-            animate={{
-              backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-            }}
-            transition={{ duration: 5, repeat: Infinity }}
-            className="block text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-accent-gold via-yellow-500 to-accent-gold bg-clip-text text-transparent bg-[length:200%_auto]"
-          >
-            העתיד
-          </motion.span>
-          
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="h-1 w-24 bg-accent-gold mx-auto mt-8 mb-6"
-          />
+          <div className="w-24 h-1 bg-accent-gold mx-auto mb-6" />
           
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
             מבט על הפרויקטים המרשימים שלנו ברחבי הארץ
@@ -184,100 +187,58 @@ const ProjectsMap = () => {
           ))}
         </div>
 
-        {/* CTA */}
+        {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.6 }}
-          className="text-center mt-16"
+          className="text-center mt-16 space-y-4"
         >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="bg-gradient-to-r from-primary to-primary-light text-white px-10 py-4 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 inline-flex items-center gap-3"
-          >
-            <span>רוצים לשמוע עוד?</span>
-            <ArrowLeft className="w-5 h-5" />
-          </motion.button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {/* כפתור לכל הפרויקטים */}
+            <EshkolButton
+              onClick={handleViewAllClick}
+              variant="primary"
+              size="md"
+            >
+              לכל הפרויקטים
+            </EshkolButton>
+
+            {/* כפתור לצור קשר */}
+            <EshkolButton
+              onClick={handleContactClick}
+              variant="outline"
+              size="md"
+              showGif={false}
+            >
+              רוצים לשמוע עוד?
+            </EshkolButton>
+          </div>
         </motion.div>
       </div>
     </section>
   )
 }
 
-// Project Card with 3D tilt effect
+// Project Card Component
 const ProjectCard = ({ project, index, statusColors }) => {
   const [isHovered, setIsHovered] = useState(false)
-  const cardRef = useRef(null)
-  
-  // Mouse tracking for 3D effect
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-  
-  // Spring animations for smooth tilt
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [8, -8]), {
-    stiffness: 150,
-    damping: 20
-  })
-  
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), {
-    stiffness: 150,
-    damping: 20
-  })
-
-  // Image parallax
-  const imageY = useTransform(mouseY, [-0.5, 0.5], [-15, 15])
-  const imageX = useTransform(mouseX, [-0.5, 0.5], [-15, 15])
-
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return
-    
-    const rect = cardRef.current.getBoundingClientRect()
-    const centerX = rect.left + rect.width / 2
-    const centerY = rect.top + rect.height / 2
-    
-    const percentX = (e.clientX - centerX) / (rect.width / 2)
-    const percentY = (e.clientY - centerY) / (rect.height / 2)
-    
-    mouseX.set(percentX)
-    mouseY.set(percentY)
-  }
-
-  const handleMouseLeave = () => {
-    setIsHovered(false)
-    mouseX.set(0)
-    mouseY.set(0)
-  }
+  const navigate = useNavigate()
 
   return (
     <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 80 }}
+      initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{
-        duration: 0.7,
-        delay: index * 0.15,
-        type: "spring",
-        stiffness: 100
-      }}
-      style={{
-        rotateX: isHovered ? rotateX : 0,
-        rotateY: isHovered ? rotateY : 0,
-        transformStyle: "preserve-3d",
-        perspective: 1000
-      }}
-      onMouseMove={handleMouseMove}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={() => navigate('/projects')}
       className="group cursor-pointer"
     >
-      {/* Card */}
       <motion.div
-        whileHover={{ z: 50 }}
-        style={{ transformStyle: "preserve-3d" }}
+        whileHover={{ y: -10 }}
         className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-500"
       >
         {/* Image Container */}
@@ -285,12 +246,8 @@ const ProjectCard = ({ project, index, statusColors }) => {
           <motion.img
             src={project.image}
             alt={project.title}
-            style={{
-              x: isHovered ? imageX : 0,
-              y: isHovered ? imageY : 0,
-              scale: isHovered ? 1.1 : 1
-            }}
-            transition={{ duration: 0.3 }}
+            animate={{ scale: isHovered ? 1.1 : 1 }}
+            transition={{ duration: 0.5 }}
             className="w-full h-full object-cover"
           />
           
@@ -298,24 +255,14 @@ const ProjectCard = ({ project, index, statusColors }) => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
           
           {/* Status badge */}
-          <motion.div
-            style={{
-              transform: isHovered ? "translateZ(30px)" : "translateZ(0px)"
-            }}
-            className="absolute top-4 right-4"
-          >
+          <div className="absolute top-4 right-4">
             <span className={`${statusColors[project.status]} text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-lg`}>
               {project.status}
             </span>
-          </motion.div>
+          </div>
 
           {/* Title on image */}
-          <motion.div
-            style={{
-              transform: isHovered ? "translateZ(40px)" : "translateZ(0px)"
-            }}
-            className="absolute bottom-4 right-4 left-4"
-          >
+          <div className="absolute bottom-4 right-4 left-4">
             <h3 className="text-2xl font-bold text-white mb-2">
               {project.title}
             </h3>
@@ -323,27 +270,24 @@ const ProjectCard = ({ project, index, statusColors }) => {
               <MapPin className="w-4 h-4" />
               <span className="text-sm">{project.location}</span>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Content */}
-        <motion.div
-          style={{
-            transform: isHovered ? "translateZ(20px)" : "translateZ(0px)"
-          }}
-          className="p-6"
-        >
+        <div className="p-6">
           <p className="text-gray-600 mb-4 leading-relaxed text-sm">
             {project.description}
           </p>
 
           {/* Stats */}
           <div className="flex items-center justify-between text-gray-700 mb-4">
-            <div className="flex items-center gap-2">
-              <Home className="w-5 h-5 text-primary" />
-              <span className="font-bold">{project.units}</span>
-              <span className="text-sm text-gray-500">יח"ד</span>
-            </div>
+            {project.units && (
+              <div className="flex items-center gap-2">
+                <Home className="w-5 h-5 text-primary" />
+                <span className="font-bold">{project.units}</span>
+                <span className="text-sm text-gray-500">יח"ד</span>
+              </div>
+            )}
             <div className="flex items-center gap-2">
               <Calendar className="w-5 h-5 text-primary" />
               <span className="font-bold">{project.completion}</span>
@@ -351,15 +295,14 @@ const ProjectCard = ({ project, index, statusColors }) => {
           </div>
 
           {/* CTA Button */}
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full bg-gradient-to-r from-primary to-primary-light text-white py-3 rounded-xl font-bold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
+          <motion.div
+            whileHover={{ x: -5 }}
+            className="flex items-center gap-2 text-primary font-bold group-hover:text-primary-light transition-colors"
           >
             <span>למידע נוסף</span>
             <ArrowLeft className="w-4 h-4" />
-          </motion.button>
-        </motion.div>
+          </motion.div>
+        </div>
       </motion.div>
     </motion.div>
   )

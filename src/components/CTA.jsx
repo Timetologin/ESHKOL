@@ -1,3 +1,4 @@
+// CTA.jsx - Call to Action מקצועי עם קישורים פנימיים בלבד
 import { motion } from 'framer-motion'
 import { Phone } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
@@ -6,13 +7,10 @@ import EshkolButton from './EshkolButton'
 const CTA = () => {
   const navigate = useNavigate()
 
+  // קישור פנימי לדף צור קשר - לא לאתר הישן!
   const handleContactClick = () => {
-    window.location.href = 'https://eshkol.co.il/form_check/'
-  }
-
-  const handleProjectsClick = () => {
-    navigate('/projects')
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    navigate('/contact')
+    window.scrollTo(0, 0)
   }
 
   return (
@@ -97,7 +95,7 @@ const CTA = () => {
             transition={{ delay: 0.5 }}
             className="flex flex-col sm:flex-row gap-6 justify-center items-center"
           >
-            {/* כפתור ראשי עם EshkolButton */}
+            {/* כפתור ראשי עם EshkolButton - לדף צור קשר פנימי */}
             <EshkolButton
               onClick={handleContactClick}
               variant="secondary"
@@ -112,7 +110,7 @@ const CTA = () => {
               href="tel:052-7847101"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="group bg-white/10 backdrop-blur-md border-2 border-white text-white px-12 py-6 rounded-2xl text-xl font-bold hover:bg-white hover:text-primary transition-all duration-300 flex items-center gap-4 cursor-pointer"
+              className="group bg-white/10 backdrop-blur-md border-2 border-white text-white px-12 py-5 rounded-xl text-xl font-bold hover:bg-white hover:text-primary transition-all duration-300 flex items-center gap-4 cursor-pointer"
             >
               <Phone className="group-hover:rotate-12 transition-transform" size={24} />
               התקשר: 052-7847101
@@ -141,24 +139,6 @@ const CTA = () => {
                 <div className="text-white/90 font-medium">{stat.label}</div>
               </motion.div>
             ))}
-          </motion.div>
-
-          {/* Additional CTA Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.7 }}
-            className="mt-12"
-          >
-            <EshkolButton
-              onClick={handleProjectsClick}
-              variant="outline"
-              size="md"
-              className="bg-white/10 backdrop-blur-md border-2 border-white text-white hover:bg-white hover:text-primary mx-auto"
-            >
-              הפרויקטים שלנו
-            </EshkolButton>
           </motion.div>
         </motion.div>
       </div>
