@@ -1,310 +1,301 @@
-import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
-import { MapPin, Home, Calendar, Filter, Search, ArrowLeft } from 'lucide-react'
+// Projects.jsx - עמוד הפרויקטים הראשי
+import React, { useState, useMemo } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { MapPin, Home, Building2, ArrowLeft, Play } from 'lucide-react';
+import { projectsData, getAllStatuses } from '../data/projectsData';
 
-const Projects = () => {
-  const [selectedCategory, setSelectedCategory] = useState('all')
-  const [searchTerm, setSearchTerm] = useState('')
-
-  const categories = [
-    { id: 'all', name: 'כל הפרויקטים' },
-    { id: 'תל-אביב', name: 'תל אביב' },
-    { id: 'מרכז', name: 'מרכז הארץ' },
-    { id: 'צפון', name: 'צפון' },
-    { id: 'דרום', name: 'דרום' }
-  ]
-
-  const projects = [
-    {
-      id: 1,
-      name: "מגדלי הצפון",
-      location: "צפון תל אביב",
-      category: "תל-אביב",
-      units: 120,
-      status: "בבנייה",
-      year: "2024",
-      image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800",
-      description: "פרויקט יוקרתי בלב צפון תל אביב עם נוף פתוח ומיקום אטרקטיבי"
-    },
-    {
-      id: 2,
-      name: "רוטשילד פארק",
-      location: "דרום תל אביב",
-      category: "תל-אביב",
-      units: 85,
-      status: "בשיווק",
-      year: "2025",
-      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800",
-      description: "מתחם בוטיק יוקרתי עם גינות ומתחמי דיירים מעוצבים"
-    },
-    {
-      id: 3,
-      name: "הרצליה גלים",
-      location: "הרצליה",
-      category: "מרכז",
-      units: 64,
-      status: "בשיווק",
-      year: "2024",
-      image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800",
-      description: "פרויקט על חוף הים עם נוף פנורמי ומרפסות שמש"
-    },
-    {
-      id: 4,
-      name: "מגדל הכרמל",
-      location: "חיפה",
-      category: "צפון",
-      units: 156,
-      status: "בבנייה",
-      year: "2024",
-      image: "https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=800",
-      description: "מגדל מגורים מפואר עם נוף מרהיב לים ולכרמל"
-    },
-    {
-      id: 5,
-      name: "העיר החדשה",
-      location: "באר שבע",
-      category: "דרום",
-      units: 98,
-      status: "בתכנון",
-      year: "2025",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
-      description: "מתחם מגורים חדש בלב העיר עם מסחר ושטחים ציבוריים"
-    },
-    {
-      id: 6,
-      name: "פארק העיר",
-      location: "פתח תקווה",
-      category: "מרכז",
-      units: 72,
-      status: "בשיווק",
-      year: "2024",
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800",
-      description: "פרויקט ירוק סמוך לפארק העירוני עם שטחים ציבוריים"
-    },
-    {
-      id: 7,
-      name: "נוף הים",
-      location: "נתניה",
-      category: "מרכז",
-      units: 110,
-      status: "בבנייה",
-      year: "2024",
-      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800",
-      description: "מתחם מגורים יוקרתי עם נוף לים התיכון"
-    },
-    {
-      id: 8,
-      name: "העמק הירוק",
-      location: "עמק יזרעאל",
-      category: "צפון",
-      units: 45,
-      status: "נמכר",
-      year: "2023",
-      image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800",
-      description: "פרויקט כפרי בסביבה ירוקה ושקטה"
-    },
-    {
-      id: 9,
-      name: "מתחם היהלום",
-      location: "רמת גן",
-      category: "תל-אביב",
-      units: 135,
-      status: "בבנייה",
-      year: "2024",
-      image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800",
-      description: "פרויקט פרימיום במיקום מרכזי ליד בורסת היהלומים"
-    }
-  ]
-
-  const filteredProjects = projects.filter(project => {
-    const matchesCategory = selectedCategory === 'all' || project.category === selectedCategory
-    const matchesSearch = project.name.includes(searchTerm) || project.location.includes(searchTerm)
-    return matchesCategory && matchesSearch
-  })
-
+// קומפוננטת כרטיס פרויקט עם אפקט 3D
+const ProjectCard = ({ project, index }) => {
+  const navigate = useNavigate();
+  const [isHovered, setIsHovered] = useState(false);
+  
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [8, -8]), { stiffness: 300, damping: 30 });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), { stiffness: 300, damping: 30 });
+  
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+  
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+    setIsHovered(false);
+  };
+  
   const getStatusColor = (status) => {
-    switch(status) {
-      case 'בבנייה': return 'bg-blue-500'
-      case 'בשיווק': return 'bg-green-500'
-      case 'נמכר': return 'bg-gray-500'
-      case 'בתכנון': return 'bg-yellow-500'
-      default: return 'bg-primary'
+    switch (status) {
+      case 'marketing': return 'bg-green-500';
+      case 'construction': return 'bg-yellow-500';
+      case 'urban-renewal': return 'bg-blue-500';
+      case 'occupied': return 'bg-gray-500';
+      default: return 'bg-primary';
     }
-  }
+  };
+  
+  const getStatusLabel = (status) => {
+    switch (status) {
+      case 'marketing': return 'בשיווק';
+      case 'construction': return 'בביצוע';
+      case 'urban-renewal': return 'התחדשות עירונית';
+      case 'occupied': return 'מאוכלס';
+      default: return status;
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Hero Section */}
-      <section className="relative py-32 bg-gradient-to-br from-primary via-primary-light to-primary overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent-gold rounded-full blur-3xl" />
-        </div>
-
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center text-white"
-          >
-            <h1 className="text-6xl md:text-7xl font-bold mb-6">
-              הפרויקטים שלנו
-            </h1>
-            <div className="h-1 w-32 bg-accent-gold mx-auto mb-6" />
-            <p className="text-2xl text-white/90 max-w-3xl mx-auto">
-              גלו את מגוון הפרויקטים האיכותיים שלנו ברחבי הארץ
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Filters Section */}
-      <section className="sticky top-20 z-40 bg-white/95 backdrop-blur-md shadow-md py-6 border-b">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
-            {/* Category Filters */}
-            <div className="flex flex-wrap gap-3 items-center">
-              <Filter size={20} className="text-primary" />
-              {categories.map(category => (
-                <motion.button
-                  key={category.id}
-                  onClick={() => setSelectedCategory(category.id)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
-                    selectedCategory === category.id
-                      ? 'bg-primary text-white shadow-lg'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
-                >
-                  {category.name}
-                </motion.button>
-              ))}
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="h-full"
+      style={{ perspective: 1000 }}
+    >
+      <motion.div
+        className="relative h-full bg-white rounded-2xl overflow-hidden shadow-lg cursor-pointer group"
+        style={{
+          rotateX,
+          rotateY,
+          transformStyle: 'preserve-3d'
+        }}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={handleMouseLeave}
+        onClick={() => navigate(`/projects/${project.slug}`)}
+        whileHover={{ scale: 1.02 }}
+      >
+        {/* תמונה */}
+        <div className="relative h-56 overflow-hidden">
+          {project.mainImage ? (
+            <motion.img
+              src={project.mainImage}
+              alt={project.name}
+              className="w-full h-full object-cover"
+              style={{
+                scale: isHovered ? 1.1 : 1,
+                transition: 'transform 0.5s ease-out'
+              }}
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/40 flex items-center justify-center">
+              <Building2 className="w-16 h-16 text-primary/50" />
             </div>
-
-            {/* Search Bar */}
-            <div className="relative w-full md:w-auto">
-              <Search className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-              <input
-                type="text"
-                placeholder="חיפוש פרויקט..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full md:w-80 pr-12 pl-6 py-3 rounded-full border-2 border-gray-200 focus:border-primary focus:outline-none transition-colors"
-              />
+          )}
+          
+          {/* שכבת כהות */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          
+          {/* תג סטטוס */}
+          <div className={`absolute top-4 right-4 ${getStatusColor(project.status)} text-white px-3 py-1 rounded-full text-sm font-medium`}>
+            {getStatusLabel(project.status)}
+          </div>
+          
+          {/* אייקון וידאו */}
+          {project.video && (
+            <div className="absolute top-4 left-4 bg-white/90 p-2 rounded-full">
+              <Play className="w-4 h-4 text-primary" />
+            </div>
+          )}
+          
+          {/* שם הפרויקט על התמונה */}
+          <div className="absolute bottom-4 right-4 left-4">
+            <h3 className="text-xl font-bold text-white mb-1">{project.name}</h3>
+            <div className="flex items-center gap-1 text-white/90 text-sm">
+              <MapPin className="w-4 h-4" />
+              <span>{project.location}</span>
             </div>
           </div>
+        </div>
+        
+        {/* תוכן */}
+        <div className="p-5">
+          <p className="text-gray-600 text-sm line-clamp-2 mb-4">
+            {project.description}
+          </p>
+          
+          {/* פרטים */}
+          <div className="flex flex-wrap gap-3 mb-4">
+            {project.units && (
+              <div className="flex items-center gap-1 text-sm text-gray-500">
+                <Home className="w-4 h-4" />
+                <span>{project.units} יח"ד</span>
+              </div>
+            )}
+            {project.buildings && (
+              <div className="flex items-center gap-1 text-sm text-gray-500">
+                <Building2 className="w-4 h-4" />
+                <span>{project.buildings} בניינים</span>
+              </div>
+            )}
+          </div>
+          
+          {/* כפתור */}
+          <motion.div
+            className="flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all"
+            whileHover={{ x: -5 }}
+          >
+            <span>למידע נוסף</span>
+            <ArrowLeft className="w-4 h-4" />
+          </motion.div>
+        </div>
+        
+        {/* אפקט זוהר */}
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: isHovered
+              ? `radial-gradient(circle at ${(mouseX.get() + 0.5) * 100}% ${(mouseY.get() + 0.5) * 100}%, rgba(26, 58, 82, 0.1) 0%, transparent 50%)`
+              : 'none'
+          }}
+        />
+      </motion.div>
+    </motion.div>
+  );
+};
 
-          {/* Results Count */}
+// קומפוננטת כפתור סינון
+const FilterButton = ({ status, isActive, onClick, count }) => (
+  <motion.button
+    onClick={onClick}
+    className={`px-5 py-2.5 rounded-full font-medium transition-all ${
+      isActive
+        ? 'bg-primary text-white shadow-lg'
+        : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+    }`}
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+  >
+    {status.label}
+    <span className={`mr-2 text-sm ${isActive ? 'text-white/80' : 'text-gray-400'}`}>
+      ({count})
+    </span>
+  </motion.button>
+);
+
+const Projects = () => {
+  const [activeFilter, setActiveFilter] = useState('all');
+  const statuses = getAllStatuses();
+  
+  const filteredProjects = useMemo(() => {
+    if (activeFilter === 'all') return projectsData;
+    return projectsData.filter(project => project.status === activeFilter);
+  }, [activeFilter]);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 relative overflow-hidden">
+      {/* רקע מונפש */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute -top-40 -right-40 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{ duration: 8, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute top-1/2 -left-40 w-80 h-80 bg-accent-gold/5 rounded-full blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.5, 0.3, 0.5],
+          }}
+          transition={{ duration: 10, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute -bottom-40 right-1/3 w-72 h-72 bg-blue-100/30 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.4, 0.6, 0.4],
+          }}
+          transition={{ duration: 12, repeat: Infinity }}
+        />
+      </div>
+
+      <div className="relative z-10 container mx-auto px-4 py-20">
+        {/* כותרת */}
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12"
+        >
+          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+            בונים את העתיד
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            הפרויקטים שלנו משלבים איכות, חדשנות ועיצוב מודרני
+          </p>
+        </motion.div>
+
+        {/* כפתורי סינון */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex flex-wrap justify-center gap-3 mb-12"
+        >
+          {statuses.map((status) => (
+            <FilterButton
+              key={status.id}
+              status={status}
+              isActive={activeFilter === status.id}
+              onClick={() => setActiveFilter(status.id)}
+              count={status.count}
+            />
+          ))}
+        </motion.div>
+
+        {/* רשת פרויקטים */}
+        <motion.div
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {filteredProjects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
+          ))}
+        </motion.div>
+
+        {/* אין תוצאות */}
+        {filteredProjects.length === 0 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="mt-4 text-gray-600 text-center md:text-right"
+            className="text-center py-20"
           >
-            נמצאו <span className="font-bold text-primary">{filteredProjects.length}</span> פרויקטים
+            <p className="text-gray-500 text-lg">לא נמצאו פרויקטים בקטגוריה זו</p>
           </motion.div>
-        </div>
-      </section>
+        )}
 
-      {/* Projects Grid */}
-      <section className="py-16">
-        <div className="container mx-auto px-6">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={selectedCategory + searchTerm}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
-              {filteredProjects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -10 }}
-                  className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
-                >
-                  {/* Image */}
-                  <div className="relative h-64 overflow-hidden">
-                    <motion.img
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.4 }}
-                      src={project.image}
-                      alt={project.name}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    
-                    {/* Status Badge */}
-                    <div className={`absolute top-4 right-4 px-4 py-2 rounded-full ${getStatusColor(project.status)} text-white font-bold text-sm shadow-lg`}>
-                      {project.status}
-                    </div>
-
-                    {/* Year Badge */}
-                    <div className="absolute bottom-4 left-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-primary font-bold text-sm">
-                      <Calendar size={14} className="inline ml-1" />
-                      {project.year}
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold text-primary mb-3 group-hover:text-primary-light transition-colors">
-                      {project.name}
-                    </h3>
-
-                    <div className="flex items-center gap-2 text-gray-600 mb-3">
-                      <MapPin size={18} className="text-accent-gold" />
-                      <span>{project.location}</span>
-                    </div>
-
-                    <div className="flex items-center gap-2 text-gray-600 mb-4">
-                      <Home size={18} className="text-accent-gold" />
-                      <span>{project.units} יחידות דיור</span>
-                    </div>
-
-                    <p className="text-gray-600 leading-relaxed mb-6 line-clamp-2">
-                      {project.description}
-                    </p>
-
-                    <motion.button
-                      whileHover={{ scale: 1.05, x: -5 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="w-full bg-gradient-to-r from-primary to-primary-light text-white px-6 py-3 rounded-lg font-bold flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all duration-300"
-                    >
-                      לפרטים נוספים
-                      <ArrowLeft size={18} />
-                    </motion.button>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </AnimatePresence>
-
-          {/* No Results */}
-          {filteredProjects.length === 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-20"
-            >
-              <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-2xl font-bold text-gray-600 mb-2">
-                לא נמצאו פרויקטים
-              </h3>
-              <p className="text-gray-500">
-                נסה לשנות את הסינון או החיפוש
-              </p>
-            </motion.div>
-          )}
-        </div>
-      </section>
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="text-center mt-16"
+        >
+          <p className="text-gray-600 mb-4">מעוניינים לשמוע עוד על הפרויקטים שלנו?</p>
+          <motion.a
+            href="https://eshkol.co.il/form_check/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-medium hover:bg-primary-light transition-colors shadow-lg"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span>צור קשר</span>
+            <ArrowLeft className="w-5 h-5" />
+          </motion.a>
+        </motion.div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Projects
+export default Projects;

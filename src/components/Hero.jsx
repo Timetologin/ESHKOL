@@ -1,119 +1,140 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { ChevronDown, ArrowLeft } from 'lucide-react'
-import { useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+// Hero.jsx - Hero עם כפתור שמעביר לעמוד פרויקטים
+import React from 'react';
+import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { ArrowLeft, Play } from 'lucide-react';
 
 const Hero = () => {
-  const ref = useRef(null)
-  const navigate = useNavigate()
-  
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"]
-  })
-
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0])
+  const navigate = useNavigate();
 
   const handleProjectsClick = () => {
-    navigate('/projects')
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+    navigate('/projects');
+    window.scrollTo(0, 0);
+  };
 
   return (
-    <div ref={ref} className="relative h-screen overflow-hidden">
-      {/* Background Image with Parallax */}
-      <motion.div
-        style={{ y }}
-        className="absolute inset-0 z-0"
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/90 via-primary/80 to-primary/70 z-10" />
-        <div 
-          className="w-full h-full bg-cover bg-center"
-          style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070)',
-            backgroundAttachment: 'fixed'
-          }}
-        />
-      </motion.div>
-
-      {/* Content */}
-      <motion.div
-        style={{ opacity }}
-        className="relative z-20 container mx-auto px-6 h-full flex flex-col justify-center items-center text-center"
-      >
-        {/* Main Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-8"
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* רקע וידאו או תמונה */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/60 to-primary/80 z-10" />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+          poster="/images/hero-bg.jpg"
         >
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight">
-            אשכול
-          </h1>
-          <div className="h-1 w-32 bg-accent-gold mx-auto mb-6" />
-          <p className="text-2xl md:text-3xl lg:text-4xl text-white font-light">
-            ייזום ובניה בסטנדרטים גבוהים
-          </p>
-        </motion.div>
+          <source src="https://eshkol.co.il/wp-content/uploads/2025/05/WhatsApp-Video-2025-05-05-at-14.04.59.mp4" type="video/mp4" />
+        </video>
+      </div>
 
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-xl md:text-2xl text-gray-200 max-w-3xl mb-12 leading-relaxed"
-        >
-          מתמחים בייזום וביצוע של פרויקטים למגורים תוך שימוש בטכנולוגיה המתקדמת ביותר
-        </motion.p>
-
-        {/* CTA Button - Only Projects */}
+      {/* תוכן */}
+      <div className="relative z-20 container mx-auto px-4 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 0.8 }}
         >
-          <motion.button
-            onClick={handleProjectsClick}
-            whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(212, 175, 55, 0.3)" }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-accent-gold text-white px-10 py-5 rounded-lg text-xl font-bold shadow-2xl hover:bg-accent-gold/90 transition-all duration-300 flex items-center gap-3 justify-center group"
+          {/* לוגו או כותרת */}
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mb-8"
           >
-            הפרויקטים שלנו
-            <ArrowLeft className="group-hover:-translate-x-2 transition-transform" size={24} />
-          </motion.button>
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
+              אשכול
+            </h1>
+            <div className="text-2xl md:text-3xl text-accent-gold font-medium">
+              בונים באהבה
+            </div>
+          </motion.div>
+
+          {/* תיאור */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto mb-10"
+          >
+            יזמות, בנייה והתחדשות עירונית
+            <br />
+            עם מחויבות לאיכות ולמצוינות
+          </motion.p>
+
+          {/* כפתורים */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <motion.button
+              onClick={handleProjectsClick}
+              className="inline-flex items-center justify-center gap-2 bg-white text-primary px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-100 transition-colors shadow-xl"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span>הפרויקטים שלנו</span>
+              <ArrowLeft className="w-5 h-5" />
+            </motion.button>
+          </motion.div>
         </motion.div>
 
-        {/* Scroll Indicator */}
+        {/* חץ גלילה */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
+          transition={{ delay: 1, duration: 0.5 }}
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            className="flex flex-col items-center gap-2"
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="text-white/60"
           >
-            <span className="text-white text-sm">גלול למטה</span>
-            <ChevronDown className="text-white" size={32} />
+            <svg
+              className="w-8 h-8"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 14l-7 7m0 0l-7-7m7 7V3"
+              />
+            </svg>
           </motion.div>
         </motion.div>
-      </motion.div>
-
-      {/* Decorative Elements */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" className="w-full">
-          <path
-            fill="#ffffff"
-            d="M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,58.7C960,64,1056,64,1152,58.7C1248,53,1344,43,1392,37.3L1440,32L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"
-          />
-        </svg>
       </div>
-    </div>
-  )
-}
 
-export default Hero
+      {/* אפקט חלקיקים */}
+      <div className="absolute inset-0 z-10 pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-white/20 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              opacity: [0.2, 0.5, 0.2],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default Hero;

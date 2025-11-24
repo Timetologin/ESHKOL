@@ -1,16 +1,17 @@
-import Hero from '../components/Hero'
-import VideoSection from '../components/VideoSection'
-import CompanyAbout from '../components/CompanyAbout'
-import Stats from '../components/Stats'
-import CompanyValues from '../components/CompanyValues'
-import Features from '../components/Features'
-import ValueChain from '../components/ValueChain'
-import ProjectsMap from '../components/ProjectsMap'
-import CTA from '../components/CTA'
+// Home.jsx - דף הבית (ללא ProjectsMap)
+import React from 'react';
+import Hero from '../components/Hero';
+import VideoSection from '../components/VideoSection';
+import CompanyAbout from '../components/CompanyAbout';
+import Stats from '../components/Stats';
+import CompanyValues from '../components/CompanyValues';
+import Features from '../components/Features';
+import ValueChain from '../components/ValueChain';
+import CTA from '../components/CTA';
 
 const Home = () => {
   return (
-    <div className="w-full">
+    <main>
       <Hero />
       <VideoSection />
       <CompanyAbout />
@@ -18,10 +19,9 @@ const Home = () => {
       <CompanyValues />
       <Features />
       <ValueChain />
-      <ProjectsMap />
       <CTA />
-    </div>
-  )
-}
+    </main>
+  );
+};
 
-export default Home
+export default Home;
