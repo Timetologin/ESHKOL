@@ -29,7 +29,7 @@ const BuildingScrollUltraRealistic = () => {
       progress: 0,
       title: 'תכנון ויזמות',
       subtitle: 'מתחילים עם חזון אדריכלי',
-      image: 'https://pnina-vider.com/wp-content/uploads/elementor/thumbs/%D7%94%D7%93%D7%9E%D7%99%D7%94-%D7%A8%D7%90%D7%A9%D7%95%D7%A0%D7%99%D7%AA-3-r4zql1bpa068rsn2bt6vxqvblrtcm8jykhiwzdfbb4.jpg',
+      image: 'https://www.targel.org.il/wp-content/uploads/2025/06/Depositphotos_503355502_S.jpg',
       overlay: 0.7
     },
     {
@@ -249,23 +249,6 @@ const BuildingScrollUltraRealistic = () => {
                     </div>
                   </div>
                 </motion.div>
-
-                {/* Scroll hint */}
-                {progress < 5 && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 2, duration: 1 }}
-                    className="text-center text-gray-400 text-sm"
-                  >
-                    <motion.div
-                      animate={{ y: [0, 8, 0] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      ↓ גלול למטה
-                    </motion.div>
-                  </motion.div>
-                )}
               </motion.div>
 
               {/* Left side - REALISTIC Building Display (3 columns) */}
@@ -299,17 +282,29 @@ const BuildingScrollUltraRealistic = () => {
                       style={{ opacity: currentPhase.overlay }}
                     />
 
-                    {/* Phase label on image */}
+                    {/* Phase label on image - minimal */}
                     <div className="absolute bottom-0 left-0 right-0 p-8">
                       <motion.div
                         initial={{ opacity: 1, y: 0 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0 }}
-                        className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20"
+                        className="text-white text-right"
                       >
-                        <div className="text-white text-right">
-                          <div className="text-2xl font-bold mb-1">{currentPhase.title}</div>
-                          <div className="text-white/80">{currentPhase.subtitle}</div>
+                        <div 
+                          className="text-2xl font-bold mb-1"
+                          style={{
+                            textShadow: '0 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.6)'
+                          }}
+                        >
+                          {currentPhase.title}
+                        </div>
+                        <div 
+                          className="text-white/90"
+                          style={{
+                            textShadow: '0 2px 6px rgba(0,0,0,0.7), 0 0 15px rgba(0,0,0,0.5)'
+                          }}
+                        >
+                          {currentPhase.subtitle}
                         </div>
                       </motion.div>
                     </div>
