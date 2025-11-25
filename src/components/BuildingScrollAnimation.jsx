@@ -29,14 +29,14 @@ const BuildingScrollUltraRealistic = () => {
       progress: 0,
       title: 'תכנון ויזמות',
       subtitle: 'מתחילים עם חזון אדריכלי',
-      image: 'https://eshkol.co.il/wp-content/uploads/2019/04/shutterstock_438434868.jpg',
+      image: 'https://pnina-vider.com/wp-content/uploads/elementor/thumbs/%D7%94%D7%93%D7%9E%D7%99%D7%94-%D7%A8%D7%90%D7%A9%D7%95%D7%A0%D7%99%D7%AA-3-r4zql1bpa068rsn2bt6vxqvblrtcm8jykhiwzdfbb4.jpg',
       overlay: 0.7
     },
     {
       progress: 20,
       title: 'חפירה ויסודות',
       subtitle: 'הכנת הקרקע ויציקת היסודות',
-      image: 'https://images.unsplash.com/photo-1590496793907-04c0f90eff5f?q=80&w=2070',
+      image: 'https://livnot.co.il/wp-content/uploads/2024/05/%D7%99%D7%A1%D7%95%D7%93-%D7%A2%D7%95%D7%91%D7%A8-%D7%A9%D7%9C%D7%90-%D7%99%D7%A2%D7%91%D7%95%D7%A8-%D7%9E%D7%A2%D7%9C%D7%99%D7%9B%D7%9D02.png',
       overlay: 0.6
     },
     {
@@ -64,7 +64,7 @@ const BuildingScrollUltraRealistic = () => {
       progress: 100,
       title: 'מסירה ללקוחות',
       subtitle: 'פרויקט מושלם - בונים באהבה',
-      image: 'https://eshkol.co.il/wp-content/uploads/2021/11/1977_apt_13_002f-scaled.jpg',
+      image: 'https://images2.madlan.co.il/t:nonce:v=2;convert:type=webp/developers/zimbuilding/%D7%9C%D7%95%D7%92%D7%95%20%D7%90%D7%A9%D7%9B%D7%95%D7%9C-6552f5a4-6811-4a2e-8406-74c8ed7f0bee.jpg',
       overlay: 0.2
     }
   ];
