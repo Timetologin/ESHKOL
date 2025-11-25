@@ -2,7 +2,6 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { ChevronDown } from 'lucide-react';
 import EshkolButton from './EshkolButton';
 
 const Hero = () => {
@@ -123,23 +122,6 @@ const Hero = () => {
             >
               לפרויקטים שלנו
             </EshkolButton>
-          </motion.div>
-        </motion.div>
-
-        {/* חץ גלילה */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.5 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="text-white/60 flex flex-col items-center gap-2"
-          >
-            <span className="text-sm">גלול למטה</span>
-            <ChevronDown className="w-8 h-8" />
           </motion.div>
         </motion.div>
       </motion.div>
