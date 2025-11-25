@@ -85,10 +85,6 @@ const BuildingScrollUltraRealistic = () => {
     [0, 1]
   );
 
-  // Image reveal effect
-  const imageScale = useTransform(smoothProgress, [0, 1], [1.1, 1]);
-  const imageOpacity = useTransform(smoothProgress, [0, 0.1, 0.9, 1], [1, 1, 1, 1]);
-
   // 3D perspective effect
   const rotateX = useTransform(smoothProgress, [0, 0.5, 1], [5, 0, -5]);
   const rotateY = useTransform(smoothProgress, [0, 0.5, 1], [-2, 0, 2]);
@@ -287,15 +283,10 @@ const BuildingScrollUltraRealistic = () => {
                   {/* Current phase image */}
                   <motion.div
                     key={currentPhase.image}
-                    initial={{ opacity: 1, scale: 1 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    initial={false}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
                     className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl"
-                    style={{
-                      scale: imageScale,
-                      opacity: 1
-                    }}
                   >
                     {/* The actual building image */}
                     <img
