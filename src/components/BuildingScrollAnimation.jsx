@@ -281,18 +281,16 @@ const BuildingScrollUltraRealistic = () => {
                   className="relative w-full max-w-4xl aspect-[4/3]"
                 >
                   {/* Current phase image */}
-                  <motion.div
-                    key={currentPhase.image}
-                    initial={false}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl"
-                  >
+                  <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl">
                     {/* The actual building image */}
-                    <img
+                    <motion.img
+                      key={currentPhase.image}
                       src={currentPhase.image}
                       alt={currentPhase.title}
                       className="w-full h-full object-cover"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5 }}
                     />
 
                     {/* Subtle overlay */}
@@ -320,7 +318,7 @@ const BuildingScrollUltraRealistic = () => {
                     <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm rounded-full px-5 py-2 shadow-lg">
                       <span className="text-primary font-bold text-lg tabular-nums">{progress}%</span>
                     </div>
-                  </motion.div>
+                  </div>
 
                   {/* Decorative elements */}
                   {progress > 5 && progress < 95 && (
