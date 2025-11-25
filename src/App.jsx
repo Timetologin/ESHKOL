@@ -7,7 +7,7 @@ import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import CustomerService from './pages/CustomerServiceForm';
+import CustomerServiceForm from './pages/CustomerServiceForm';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
             <Route path="/projects/:slug" element={<ProjectDetail />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/customer-service" element={<CustomerService />} />
+            <Route path="/customer-service-form" element={<CustomerServiceForm />} />
           </Routes>
         </main>
         <Footer />

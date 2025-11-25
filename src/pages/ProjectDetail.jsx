@@ -262,7 +262,7 @@ const TechnicalSpecs = ({ specs }) => {
 };
 
 // קומפוננטת CTA
-const ContactCTA = ({ projectName }) => (
+const ContactCTA = ({ projectName, onContactClick }) => (
   <motion.section
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -273,17 +273,15 @@ const ContactCTA = ({ projectName }) => (
     <p className="text-white/80 mb-6">השאירו פרטים ונחזור אליכם בהקדם</p>
     
     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-      <motion.a
-        href="https://eshkol.co.il/form_check/"
-        target="_blank"
-        rel="noopener noreferrer"
+      <motion.button
+        onClick={onContactClick}
         className="inline-flex items-center justify-center gap-2 bg-white text-primary px-8 py-4 rounded-xl font-medium hover:bg-gray-100 transition-colors"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
         <Mail className="w-5 h-5" />
         <span>השאירו פרטים</span>
-      </motion.a>
+      </motion.button>
       
       <motion.a
         href="tel:052-7847101"
@@ -311,6 +309,12 @@ const ProjectDetail = () => {
     setProject(foundProject);
     setLoading(false);
   }, [slug]);
+
+  // פונקציה לניווט לדף צור קשר - קישור פנימי!
+  const handleContactClick = () => {
+    navigate('/contact');
+    window.scrollTo(0, 0);
+  };
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -519,18 +523,16 @@ const ProjectDetail = () => {
                 )}
               </div>
 
-              {/* כפתור יצירת קשר */}
-              <motion.a
-                href="https://eshkol.co.il/form_check/"
-                target="_blank"
-                rel="noopener noreferrer"
+              {/* כפתור יצירת קשר - קישור פנימי! */}
+              <motion.button
+                onClick={handleContactClick}
                 className="mt-6 w-full inline-flex items-center justify-center gap-2 bg-primary text-white px-6 py-4 rounded-xl font-medium hover:bg-primary-light transition-colors"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <Mail className="w-5 h-5" />
                 <span>מעוניין לשמוע עוד</span>
-              </motion.a>
+              </motion.button>
 
               <a
                 href="tel:052-7847101"
@@ -545,7 +547,7 @@ const ProjectDetail = () => {
 
         {/* CTA */}
         <div className="mt-12">
-          <ContactCTA projectName={project.name} />
+          <ContactCTA projectName={project.name} onContactClick={handleContactClick} />
         </div>
       </div>
     </div>
