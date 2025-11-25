@@ -1,369 +1,374 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { Building2, Pencil, HardHat, Key, CheckCircle2 } from 'lucide-react';
+import { Award } from 'lucide-react';
 
-const BuildingScrollAnimationPro = () => {
+const BuildingScrollUltraRealistic = () => {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
 
-  const buildingProgress = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  // Smooth spring physics
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const unsubscribe = buildingProgress.onChange(v => setProgress(Math.round(v)));
+    const unsubscribe = smoothProgress.onChange(v => setProgress(Math.round(v * 100)));
     return unsubscribe;
-  }, [buildingProgress]);
+  }, [smoothProgress]);
 
-  // Building layers - realistic minimal style
-  const foundationOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
-  const foundationY = useTransform(scrollYProgress, [0, 0.2], [50, 0]);
-  
-  const floor1Opacity = useTransform(scrollYProgress, [0.2, 0.4], [0, 1]);
-  const floor1Y = useTransform(scrollYProgress, [0.2, 0.4], [50, 0]);
-  
-  const floor2Opacity = useTransform(scrollYProgress, [0.4, 0.6], [0, 1]);
-  const floor2Y = useTransform(scrollYProgress, [0.4, 0.6], [50, 0]);
-  
-  const floor3Opacity = useTransform(scrollYProgress, [0.6, 0.8], [0, 1]);
-  const floor3Y = useTransform(scrollYProgress, [0.6, 0.8], [50, 0]);
-  
-  const roofOpacity = useTransform(scrollYProgress, [0.8, 0.9], [0, 1]);
-  const roofY = useTransform(scrollYProgress, [0.8, 0.9], [50, 0]);
-  
-  const completionOpacity = useTransform(scrollYProgress, [0.9, 1], [0, 1]);
-
-  const stages = [
-    { 
-      progress: 0, 
-      icon: Pencil, 
-      title: 'תכנון ויזמות', 
-      desc: 'מתחילים עם חזון ותכנון מקצועי',
-      image: 'https://eshkol.co.il/wp-content/uploads/2019/04/shutterstock_438434868.jpg'
+  // Building phases with REAL images from Eshkol projects
+  const buildingPhases = [
+    {
+      progress: 0,
+      title: 'תכנון ויזמות',
+      subtitle: 'מתחילים עם חזון אדריכלי',
+      image: 'https://eshkol.co.il/wp-content/uploads/2019/04/shutterstock_438434868.jpg',
+      overlay: 0.7
     },
-    { 
-      progress: 25, 
-      icon: Building2, 
-      title: 'יסודות והיתרים', 
-      desc: 'בניית יסודות איתנים וקבלת כל האישורים',
-      image: 'https://eshkol.co.il/wp-content/uploads/2019/04/shutterstock_438434868.jpg'
+    {
+      progress: 20,
+      title: 'חפירה ויסודות',
+      subtitle: 'הכנת הקרקע ויציקת היסודות',
+      image: 'https://images.unsplash.com/photo-1590496793907-04c0f90eff5f?q=80&w=2070',
+      overlay: 0.6
     },
-    { 
-      progress: 50, 
-      icon: HardHat, 
-      title: 'ביצוע ובנייה', 
-      desc: 'בונים את הפרויקט עם מומחיות וניסיון',
-      image: 'https://eshkol.co.il/wp-content/uploads/2019/04/shutterstock_438434868.jpg'
+    {
+      progress: 40,
+      title: 'שלד הבניין',
+      subtitle: 'עמודים וקומות בביצוע',
+      image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070',
+      overlay: 0.5
     },
-    { 
-      progress: 75, 
-      icon: Building2, 
-      title: 'גימורים ופיתוח', 
-      desc: 'תשומת לב לכל פרט ועיצוב',
-      image: 'https://eshkol.co.il/wp-content/uploads/2019/04/shutterstock_438434868.jpg'
+    {
+      progress: 60,
+      title: 'גמר חוץ וחזיתות',
+      subtitle: 'בנייה מתקדמת של הקומות',
+      image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2131',
+      overlay: 0.4
     },
-    { 
-      progress: 100, 
-      icon: Key, 
-      title: 'מסירה ללקוחות', 
-      desc: 'הבית שלכם מוכן - בונים באהבה',
-      image: 'https://eshkol.co.il/wp-content/uploads/2021/11/1977_apt_13_002f-scaled.jpg'
+    {
+      progress: 80,
+      title: 'גימורים ופנים',
+      subtitle: 'השלמת הפרטים והעיצוב',
+      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070',
+      overlay: 0.3
+    },
+    {
+      progress: 100,
+      title: 'מסירה ללקוחות',
+      subtitle: 'פרויקט מושלם - בונים באהבה',
+      image: 'https://eshkol.co.il/wp-content/uploads/2021/11/1977_apt_13_002f-scaled.jpg',
+      overlay: 0.2
     }
   ];
 
-  const currentStage = stages.reduce((acc, stage) => 
-    progress >= stage.progress ? stage : acc
-  , stages[0]);
+  // Find current phase
+  const currentPhase = buildingPhases.reduce((acc, phase) => 
+    progress >= phase.progress ? phase : acc
+  , buildingPhases[0]);
+
+  // Next phase for transition
+  const currentPhaseIndex = buildingPhases.indexOf(currentPhase);
+  const nextPhase = buildingPhases[Math.min(currentPhaseIndex + 1, buildingPhases.length - 1)];
+
+  // Calculate transition between phases
+  const phaseTransition = useTransform(
+    smoothProgress,
+    [currentPhase.progress / 100, nextPhase.progress / 100],
+    [0, 1]
+  );
+
+  // Image reveal effect
+  const imageScale = useTransform(smoothProgress, [0, 1], [1.2, 1]);
+  const imageOpacity = useTransform(smoothProgress, [0, 0.1, 0.9, 1], [0.5, 1, 1, 1]);
+
+  // 3D perspective effect
+  const rotateX = useTransform(smoothProgress, [0, 0.5, 1], [5, 0, -5]);
+  const rotateY = useTransform(smoothProgress, [0, 0.5, 1], [-2, 0, 2]);
+
+  // Stats animation
+  const statsOpacity = useTransform(smoothProgress, [0.9, 1], [0, 1]);
+  const statsY = useTransform(smoothProgress, [0.9, 1], [50, 0]);
 
   return (
     <div ref={containerRef} className="relative h-[400vh] bg-gradient-to-b from-white via-gray-50 to-white">
-      {/* Sticky Container */}
+      
+      {/* Sticky viewport */}
       <div className="sticky top-0 h-screen overflow-hidden">
         
-        {/* Background Pattern - Subtle */}
-        <div className="absolute inset-0 opacity-5">
+        {/* Subtle grid background */}
+        <div className="absolute inset-0 opacity-[0.02]">
           <div className="absolute inset-0" style={{
             backgroundImage: `linear-gradient(#1a3a52 1px, transparent 1px), linear-gradient(90deg, #1a3a52 1px, transparent 1px)`,
-            backgroundSize: '50px 50px'
+            backgroundSize: '40px 40px'
           }} />
         </div>
 
+        {/* Main container */}
         <div className="relative h-full flex items-center">
-          <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="container mx-auto px-4 lg:px-8">
+            <div className="grid lg:grid-cols-5 gap-12 items-center">
               
-              {/* Left Side - Professional Text & Progress */}
-              <motion.div className="text-right space-y-8 relative z-10">
+              {/* Right side - Info Panel (2 columns) */}
+              <motion.div className="lg:col-span-2 text-right space-y-8 relative z-20">
                 
-                {/* Eshkol Logo GIF */}
+                {/* Eshkol Logo */}
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="flex justify-end mb-8"
-                >
-                  <img 
-                    src="https://eshkol.co.il/wp-content/themes/nastunish/images/logo-gif.gif"
-                    alt="אשכול"
-                    className="w-20 h-20 object-contain"
-                  />
-                </motion.div>
-
-                {/* Stage Card - Minimal & Professional */}
-                <motion.div
-                  key={currentStage.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="bg-white rounded-2xl p-10 shadow-xl border border-gray-100"
-                >
-                  {/* Icon & Title */}
-                  <div className="flex items-center gap-4 mb-6 justify-end">
-                    <h2 className="text-4xl font-bold text-primary">
-                      {currentStage.title}
-                    </h2>
-                    <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center">
-                      <currentStage.icon className="w-7 h-7 text-primary" strokeWidth={1.5} />
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                    {currentStage.desc}
-                  </p>
-                  
-                  {/* Progress Display - Minimal */}
-                  <div className="space-y-4">
-                    {/* Percentage */}
-                    <div className="flex items-end justify-between mb-2">
-                      <span className="text-lg text-gray-500 font-medium">התקדמות</span>
-                      <span className="text-5xl font-bold text-primary tabular-nums">
-                        {progress}%
-                      </span>
-                    </div>
-                    
-                    {/* Progress Bar - Clean */}
-                    <div className="relative h-2 bg-gray-100 rounded-full overflow-hidden">
-                      <motion.div
-                        style={{ width: `${progress}%` }}
-                        className="absolute inset-y-0 right-0 bg-primary rounded-full"
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                      />
-                      {/* Accent highlight */}
-                      <motion.div
-                        style={{ width: `${progress}%` }}
-                        className="absolute inset-y-0 right-0 bg-gradient-to-l from-accent-gold/50 to-transparent rounded-full"
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Completion Badge */}
-                  {progress >= 95 && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="mt-8 p-6 bg-gradient-to-br from-primary/5 to-accent-gold/5 rounded-xl border border-accent-gold/20"
-                    >
-                      <div className="flex items-center gap-3 mb-3 justify-end">
-                        <h3 className="text-2xl font-bold text-primary">בונים באהבה</h3>
-                        <CheckCircle2 className="w-6 h-6 text-accent-gold" strokeWidth={2} />
-                      </div>
-                      <p className="text-gray-700 text-lg">
-                        מעל 25 שנות ניסיון | 5,000+ יחידות דיור | 98% שביעות רצון
-                      </p>
-                    </motion.div>
-                  )}
-                </motion.div>
-
-                {/* Real Project Image - Fades in with stage */}
-                <motion.div
-                  key={currentStage.image}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ duration: 0.6 }}
-                  className="relative rounded-2xl overflow-hidden shadow-2xl"
+                  transition={{ duration: 1 }}
+                  className="flex justify-end mb-12"
                 >
-                  <img 
-                    src={currentStage.image}
-                    alt={currentStage.title}
-                    className="w-full h-64 object-cover"
+                  <motion.img 
+                    src="https://eshkol.co.il/wp-content/themes/nastunish/images/logo-gif.gif"
+                    alt="אשכול"
+                    className="w-24 h-24 object-contain"
+                    animate={{ 
+                      scale: [1, 1.05, 1],
+                      opacity: [0.9, 1, 0.9]
+                    }}
+                    transition={{ 
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/30 to-transparent" />
-                  <div className="absolute bottom-6 right-6 left-6">
-                    <p className="text-white text-lg font-medium">
-                      {currentStage.title}
-                    </p>
+                </motion.div>
+
+                {/* Phase info card */}
+                <motion.div
+                  key={currentPhase.title}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  className="bg-white/95 backdrop-blur-xl rounded-3xl p-10 shadow-2xl border border-gray-100 relative overflow-hidden"
+                >
+                  {/* Accent line */}
+                  <div className="absolute top-0 right-0 h-full w-1 bg-gradient-to-b from-primary via-accent-gold to-primary" />
+                  
+                  {/* Content */}
+                  <div className="space-y-6">
+                    {/* Title */}
+                    <div>
+                      <motion.h2 
+                        className="text-5xl lg:text-6xl font-bold text-primary mb-3 leading-tight"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                      >
+                        {currentPhase.title}
+                      </motion.h2>
+                      <motion.p 
+                        className="text-xl text-gray-600"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3 }}
+                      >
+                        {currentPhase.subtitle}
+                      </motion.p>
+                    </div>
+
+                    {/* Progress */}
+                    <div className="space-y-4 pt-6">
+                      {/* Number */}
+                      <div className="flex items-baseline justify-between">
+                        <span className="text-lg font-medium text-gray-500">התקדמות הפרויקט</span>
+                        <motion.span 
+                          className="text-6xl font-bold bg-gradient-to-l from-primary to-accent-gold bg-clip-text text-transparent tabular-nums"
+                          key={progress}
+                          initial={{ scale: 1.2, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {progress}%
+                        </motion.span>
+                      </div>
+
+                      {/* Progress bar */}
+                      <div className="relative">
+                        {/* Background */}
+                        <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
+                          {/* Fill */}
+                          <motion.div
+                            className="h-full bg-gradient-to-l from-primary via-accent-gold to-primary rounded-full relative"
+                            style={{ width: `${progress}%` }}
+                            transition={{ duration: 0.5, ease: "easeOut" }}
+                          >
+                            {/* Shine effect */}
+                            <motion.div
+                              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                              animate={{ x: ['-100%', '200%'] }}
+                              transition={{ 
+                                duration: 2,
+                                repeat: Infinity,
+                                ease: "linear",
+                                repeatDelay: 1
+                              }}
+                            />
+                          </motion.div>
+                        </div>
+                      </div>
+
+                      {/* Milestones */}
+                      <div className="flex justify-between text-xs text-gray-400 pt-2">
+                        <span>התחלה</span>
+                        <span>בביצוע</span>
+                        <span>השלמה</span>
+                      </div>
+                    </div>
                   </div>
                 </motion.div>
 
-                {/* Scroll Hint - Minimal */}
+                {/* Completion badge */}
+                <motion.div
+                  style={{ opacity: statsOpacity, y: statsY }}
+                  className="bg-gradient-to-br from-primary/10 via-accent-gold/10 to-primary/10 rounded-2xl p-8 border border-accent-gold/20 backdrop-blur-sm"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent-gold to-yellow-600 flex items-center justify-center flex-shrink-0">
+                      <Award className="w-6 h-6 text-white" strokeWidth={2} />
+                    </div>
+                    <div className="text-right">
+                      <h3 className="text-2xl font-bold text-primary mb-2">בונים באהבה</h3>
+                      <p className="text-gray-700 leading-relaxed">
+                        מעל 25 שנות ניסיון בבניית יחידות דיור איכותיות
+                      </p>
+                      <div className="flex gap-6 mt-4 justify-end text-sm">
+                        <div>
+                          <div className="text-2xl font-bold text-primary">5,000+</div>
+                          <div className="text-gray-500">יחידות דיור</div>
+                        </div>
+                        <div>
+                          <div className="text-2xl font-bold text-primary">98%</div>
+                          <div className="text-gray-500">שביעות רצון</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Scroll hint */}
                 {progress < 5 && (
                   <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1 }}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 2, duration: 1 }}
                     className="text-center text-gray-400 text-sm"
                   >
-                    גלול למטה
+                    <motion.div
+                      animate={{ y: [0, 8, 0] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      ↓ גלול למטה
+                    </motion.div>
                   </motion.div>
                 )}
               </motion.div>
 
-              {/* Right Side - Minimal Building Visualization */}
-              <div className="relative h-[600px] flex items-end justify-center">
+              {/* Left side - REALISTIC Building Display (3 columns) */}
+              <div className="lg:col-span-3 relative h-screen flex items-center justify-center">
                 
-                {/* Building Container - Professional & Clean */}
-                <div className="relative w-80 h-[500px]">
-                  
-                  {/* Foundation */}
+                {/* Main image container with 3D perspective */}
+                <motion.div
+                  style={{
+                    perspective: 2000,
+                    rotateX,
+                    rotateY
+                  }}
+                  className="relative w-full max-w-4xl aspect-[4/3]"
+                >
+                  {/* Current phase image */}
                   <motion.div
-                    style={{ opacity: foundationOpacity, y: foundationY }}
-                    className="absolute bottom-0 left-0 right-0"
+                    key={currentPhase.image}
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl"
+                    style={{
+                      scale: imageScale,
+                      opacity: imageOpacity
+                    }}
                   >
-                    <div className="h-24 bg-gradient-to-b from-gray-800 to-gray-900 relative overflow-hidden">
-                      {/* Texture */}
-                      <div className="absolute inset-0 opacity-20" style={{
-                        backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.1) 2px, rgba(255,255,255,0.1) 4px)'
-                      }} />
-                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-accent-gold/50" />
-                    </div>
-                  </motion.div>
+                    {/* The actual building image */}
+                    <img
+                      src={currentPhase.image}
+                      alt={currentPhase.title}
+                      className="w-full h-full object-cover"
+                    />
 
-                  {/* Floor 1 - Ground */}
-                  <motion.div
-                    style={{ opacity: floor1Opacity, y: floor1Y }}
-                    className="absolute bottom-24 left-0 right-0"
-                  >
-                    <div className="h-28 bg-gradient-to-b from-gray-200 to-gray-300 border-x-2 border-primary/20 relative overflow-hidden">
-                      {/* Windows Grid */}
-                      <div className="absolute inset-0 grid grid-cols-4 gap-4 p-4">
-                        {Array.from({ length: 4 }).map((_, i) => (
-                          <motion.div
-                            key={`f1-w-${i}`}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.3 + i * 0.1, duration: 0.3 }}
-                            className="bg-gradient-to-b from-cyan-100 to-cyan-200 border border-gray-400/30"
-                          />
-                        ))}
-                      </div>
-                      <div className="absolute bottom-0 left-0 right-0 h-px bg-primary/30" />
-                    </div>
-                  </motion.div>
+                    {/* Subtle overlay */}
+                    <div 
+                      className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent"
+                      style={{ opacity: currentPhase.overlay }}
+                    />
 
-                  {/* Floor 2 */}
-                  <motion.div
-                    style={{ opacity: floor2Opacity, y: floor2Y }}
-                    className="absolute bottom-52 left-0 right-0"
-                  >
-                    <div className="h-28 bg-gradient-to-b from-gray-300 to-gray-400 border-x-2 border-primary/20 relative overflow-hidden">
-                      {/* Windows Grid */}
-                      <div className="absolute inset-0 grid grid-cols-4 gap-4 p-4">
-                        {Array.from({ length: 4 }).map((_, i) => (
-                          <motion.div
-                            key={`f2-w-${i}`}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.3 + i * 0.1, duration: 0.3 }}
-                            className="bg-gradient-to-b from-cyan-100 to-cyan-200 border border-gray-400/30"
-                          />
-                        ))}
-                      </div>
-                      <div className="absolute bottom-0 left-0 right-0 h-px bg-primary/30" />
-                    </div>
-                  </motion.div>
-
-                  {/* Floor 3 - Top */}
-                  <motion.div
-                    style={{ opacity: floor3Opacity, y: floor3Y }}
-                    className="absolute bottom-80 left-0 right-0"
-                  >
-                    <div className="h-28 bg-gradient-to-b from-gray-400 to-gray-500 border-x-2 border-primary/20 relative overflow-hidden">
-                      {/* Windows Grid */}
-                      <div className="absolute inset-0 grid grid-cols-4 gap-4 p-4">
-                        {Array.from({ length: 4 }).map((_, i) => (
-                          <motion.div
-                            key={`f3-w-${i}`}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.3 + i * 0.1, duration: 0.3 }}
-                            className="bg-gradient-to-b from-cyan-100 to-cyan-200 border border-gray-400/30"
-                          />
-                        ))}
-                      </div>
-                      <div className="absolute bottom-0 left-0 right-0 h-px bg-primary/30" />
-                    </div>
-                  </motion.div>
-
-                  {/* Roof - Minimal */}
-                  <motion.div
-                    style={{ opacity: roofOpacity, y: roofY }}
-                    className="absolute bottom-[26rem] left-0 right-0"
-                  >
-                    <div className="h-12 bg-gradient-to-b from-primary to-primary-light border-2 border-primary relative">
-                      {/* Accent line */}
-                      <div className="absolute top-0 left-0 right-0 h-1 bg-accent-gold" />
-                    </div>
-                  </motion.div>
-
-                  {/* Completion Overlay - Professional */}
-                  <motion.div
-                    style={{ opacity: completionOpacity }}
-                    className="absolute inset-0 flex items-center justify-center"
-                  >
-                    <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border-2 border-accent-gold/30 max-w-sm">
-                      <div className="text-center space-y-4">
-                        <div className="w-16 h-16 mx-auto bg-gradient-to-br from-accent-gold to-yellow-600 rounded-full flex items-center justify-center">
-                          <CheckCircle2 className="w-8 h-8 text-white" strokeWidth={2.5} />
-                        </div>
-                        <h3 className="text-2xl font-bold text-primary">
-                          הפרויקט הושלם
-                        </h3>
-                        <p className="text-gray-600">
-                          מוכן למסירה ללקוחות מרוצים
-                        </p>
-                        <div className="pt-4 border-t border-gray-200">
-                          <p className="text-primary font-bold text-lg">
-                            בונים באהבה
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Subtle Construction Lines */}
-                  {progress > 0 && progress < 90 && (
-                    <div className="absolute inset-0 pointer-events-none">
-                      {/* Vertical guides */}
-                      <div className="absolute left-0 top-0 bottom-0 w-px bg-accent-gold/20" />
-                      <div className="absolute right-0 top-0 bottom-0 w-px bg-accent-gold/20" />
-                      {/* Horizontal guide at current progress */}
+                    {/* Phase label on image */}
+                    <div className="absolute bottom-0 left-0 right-0 p-8">
                       <motion.div
-                        style={{ 
-                          bottom: `${progress * 4.5}px`,
-                          opacity: 0.3 
-                        }}
-                        className="absolute left-0 right-0 h-px bg-accent-gold"
-                      />
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4 }}
+                        className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20"
+                      >
+                        <div className="text-white text-right">
+                          <div className="text-2xl font-bold mb-1">{currentPhase.title}</div>
+                          <div className="text-white/80">{currentPhase.subtitle}</div>
+                        </div>
+                      </motion.div>
                     </div>
-                  )}
-                </div>
 
-                {/* Measurements - Professional Touch */}
-                {progress > 10 && progress < 95 && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 0.6 }}
-                    className="absolute right-0 top-1/4 space-y-2"
-                  >
-                    <div className="flex items-center gap-2 text-sm text-gray-500">
-                      <div className="w-8 h-px bg-gray-400" />
-                      <span className="font-mono">{Math.round(progress * 4.5)}m</span>
+                    {/* Progress indicator on image */}
+                    <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm rounded-full px-5 py-2 shadow-lg">
+                      <span className="text-primary font-bold text-lg tabular-nums">{progress}%</span>
                     </div>
                   </motion.div>
-                )}
+
+                  {/* Decorative elements */}
+                  {progress > 5 && progress < 95 && (
+                    <>
+                      {/* Corner brackets */}
+                      <div className="absolute top-0 right-0 w-24 h-24 border-t-2 border-r-2 border-accent-gold/30 rounded-tr-3xl" />
+                      <div className="absolute bottom-0 left-0 w-24 h-24 border-b-2 border-l-2 border-accent-gold/30 rounded-bl-3xl" />
+                    </>
+                  )}
+                </motion.div>
+
+                {/* Ambient lighting effects */}
+                <div className="absolute inset-0 pointer-events-none">
+                  <motion.div
+                    className="absolute top-1/4 -right-32 w-96 h-96 bg-accent-gold/5 rounded-full blur-3xl"
+                    animate={{
+                      scale: [1, 1.2, 1],
+                      opacity: [0.3, 0.5, 0.3]
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                  <motion.div
+                    className="absolute bottom-1/4 -left-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
+                    animate={{
+                      scale: [1.2, 1, 1.2],
+                      opacity: [0.5, 0.3, 0.5]
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 2
+                    }}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -373,4 +378,4 @@ const BuildingScrollAnimationPro = () => {
   );
 };
 
-export default BuildingScrollAnimationPro;
+export default BuildingScrollUltraRealistic;
