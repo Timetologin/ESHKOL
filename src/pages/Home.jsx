@@ -8,7 +8,6 @@ import Stats from '../components/Stats';
 import CompanyValues from '../components/CompanyValues';
 import Features from '../components/Features';
 import ValueChain from '../components/ValueChain';
-import WhyEshkol from '../components/WhyEshkol';
 import CTA from '../components/CTA';
 
 const Home = () => {
@@ -18,7 +17,6 @@ const Home = () => {
       <VideoSection />
       <CompanyAbout />
       <Stats />
-      <WhyEshkol />
       <BuildingScrollAnimation />
       <CompanyValues />
       <Features />
