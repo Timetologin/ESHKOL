@@ -3,6 +3,7 @@ import React from 'react';
 import Hero from '../components/Hero';
 import VideoSection from '../components/VideoSection';
 import CompanyAbout from '../components/CompanyAbout';
+import BuildingScrollAnimation from '../components/BuildingScrollAnimation';
 import Stats from '../components/Stats';
 import CompanyValues from '../components/CompanyValues';
 import Features from '../components/Features';
@@ -16,6 +17,7 @@ const Home = () => {
       <VideoSection />
       <CompanyAbout />
       <Stats />
+      <BuildingScrollAnimation />
       <CompanyValues />
       <Features />
       <ValueChain />
