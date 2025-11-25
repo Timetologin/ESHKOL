@@ -94,7 +94,7 @@ const BuildingScrollAnimation = () => {
   const statsY = useTransform(smoothProgress, [0.9, 1], [50, 0]);
 
   return (
-    <div ref={containerRef} className="relative h-[300vh] sm:h-[350vh] lg:h-[400vh] bg-gradient-to-b from-white via-gray-50 to-white">
+    <div ref={containerRef} className="relative h-[250vh] sm:h-[300vh] md:h-[350vh] lg:h-[400vh] bg-gradient-to-b from-white via-gray-50 to-white">
       
       {/* Sticky viewport */}
       <div className="sticky top-0 h-screen overflow-hidden">
@@ -116,7 +116,7 @@ const BuildingScrollAnimation = () => {
                 - Tablet: 1 column (עדיין בעמודה)
                 - Desktop: 5 columns (2 למידע, 3 לתמונה)
             */}
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-8 lg:gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 md:gap-8 lg:gap-12 items-center">
               
               {/* Right side - Info Panel (2 columns on desktop) */}
               <motion.div className="lg:col-span-2 text-right space-y-4 sm:space-y-6 lg:space-y-8 relative z-20 order-2 lg:order-1">
@@ -258,7 +258,7 @@ const BuildingScrollAnimation = () => {
               </motion.div>
 
               {/* Left side - REALISTIC Building Display (3 columns on desktop) */}
-              <div className="lg:col-span-3 relative h-[60vh] sm:h-[70vh] lg:h-screen flex items-center justify-center order-1 lg:order-2">
+              <div className="lg:col-span-3 relative h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-screen flex items-center justify-center order-1 lg:order-2">
                 
                 {/* Main image container with 3D perspective - RESPONSIVE */}
                 <motion.div
@@ -267,7 +267,7 @@ const BuildingScrollAnimation = () => {
                     rotateX,
                     rotateY
                   }}
-                  className="relative w-full h-full max-w-full sm:max-w-2xl lg:max-w-4xl"
+                  className="relative w-full h-full sm:h-full md:h-full lg:h-auto lg:aspect-[4/3] max-w-full sm:max-w-2xl lg:max-w-4xl"
                 >
                   {/* Current phase image - RESPONSIVE ASPECT RATIO */}
                   <div className="absolute inset-0 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
