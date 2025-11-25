@@ -41,6 +41,20 @@ const About = () => {
             transition={{ duration: 0.8 }}
             className="text-center text-white"
           >
+            {/* לוגו GIF */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              className="mb-8"
+            >
+              <img 
+                src="https://eshkol.co.il/wp-content/themes/nastunish/images/logo-gif.gif"
+                alt="אשכול"
+                className="w-32 h-32 mx-auto object-contain"
+              />
+            </motion.div>
+
             <h1 className="text-6xl md:text-7xl font-bold mb-6">
               אודות אשכול
             </h1>
@@ -225,24 +239,231 @@ const About = () => {
         </div>
       </section>
 
-      {/* Company Image */}
-      <section className="py-24">
+      {/* Team Section - הצוות שלנו */}
+      <section className="py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="max-w-5xl mx-auto"
+            className="text-center mb-16"
           >
-            <div className="rounded-3xl overflow-hidden shadow-2xl">
-              <img
-                src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2070"
-                alt="אשכול - בניה ויזמות"
-                className="w-full h-auto"
-              />
-            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+              הצוות שלנו
+            </h2>
+            <div className="h-1 w-32 bg-accent-gold mx-auto mb-6" />
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+              אנשי המקצוע המובילים את אשכול להצלחה
+            </p>
           </motion.div>
+
+          {/* Team Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
+            
+            {/* דרור אברהמי - מנכ"ל */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              whileHover={{ y: -8 }}
+              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
+            >
+              <div className="aspect-[3/4] overflow-hidden bg-gray-100">
+                <img 
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToIDLz24CJy_6NrgHaeq-OPA6o3vE6hDsX6Q&s"
+                  alt="דרור אברהמי"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6 text-center border-t-2 border-accent-gold">
+                <h3 className="text-xl font-bold text-primary mb-2">
+                  דרור אברהמי
+                </h3>
+                <p className="text-gray-600">
+                  מנכ"ל ודירקטור
+                </p>
+              </div>
+            </motion.div>
+
+            {/* שי אברהמי - סמנכ"ל כספים */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              whileHover={{ y: -8 }}
+              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
+            >
+              <div className="aspect-[3/4] overflow-hidden bg-gray-100">
+                <img 
+                  src="https://jerusalemnews.co.il/wp-content/uploads/2023/08/%D7%A9%D7%99-%D7%90%D7%91%D7%A8%D7%94%D7%9E%D7%99-%D7%A6%D7%99%D7%9C%D7%95%D7%9D-%D7%A2%D7%95%D7%93%D7%93-%D7%A7%D7%A8%D7%A0%D7%99_800x737.jpg"
+                  alt="שי אברהמי"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6 text-center border-t-2 border-accent-gold">
+                <h3 className="text-xl font-bold text-primary mb-2">
+                  שי אברהמי
+                </h3>
+                <p className="text-gray-600">
+                  סמנכ"ל כספים
+                </p>
+              </div>
+            </motion.div>
+
+            {/* עו"ד לילך אברהמי-יעקב - מנהלת מחלקת יזמות */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ y: -8 }}
+              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
+            >
+              <div className="aspect-[3/4] overflow-hidden bg-gray-100">
+                <img 
+                  src="https://res.cloudinary.com/dmabeivkl/image/upload/w_800,fl_lossy,f_auto/v1610522948/main-image/qa7rvr9dov9ux8sqmldz.jpg"
+                  alt="עו&quot;ד לילך אברהמי-יעקב"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6 text-center border-t-2 border-accent-gold">
+                <h3 className="text-xl font-bold text-primary mb-2">
+                  עו"ד לילך אברהמי-יעקב
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  מנהלת מחלקת יזמות והתחדשות עירונית
+                </p>
+              </div>
+            </motion.div>
+
+            {/* גדעון אברהמי - יו"ר הדירקטוריון */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              whileHover={{ y: -8 }}
+              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
+            >
+              <div className="aspect-[3/4] overflow-hidden bg-gray-100">
+                <img 
+                  src="https://sites3.webetter.net/wp-content/uploads/2018/07/gidon-avrahami.jpg"
+                  alt="גדעון אברהמי"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6 text-center border-t-2 border-accent-gold">
+                <h3 className="text-xl font-bold text-primary mb-2">
+                  גדעון אברהמי
+                </h3>
+                <p className="text-gray-600">
+                  יו"ר הדירקטוריון
+                </p>
+              </div>
+            </motion.div>
+
+            {/* אביטל משה - שמאית ומנהלת פיתוח עסקי */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              whileHover={{ y: -8 }}
+              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
+            >
+              <div className="aspect-[3/4] bg-gradient-to-br from-primary via-primary-light to-accent-gold/20 flex items-center justify-center relative overflow-hidden">
+                {/* Background pattern */}
+                <div className="absolute inset-0 opacity-10">
+                  <div className="absolute inset-0" style={{
+                    backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+                    backgroundSize: '24px 24px'
+                  }} />
+                </div>
+                
+                {/* Icon */}
+                <div className="relative z-10">
+                  <div className="w-32 h-32 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border-4 border-white/30">
+                    <Award className="w-16 h-16 text-white" strokeWidth={1.5} />
+                  </div>
+                </div>
+              </div>
+              <div className="p-6 text-center border-t-2 border-accent-gold">
+                <h3 className="text-xl font-bold text-primary mb-2">
+                  אביטל משה
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  שמאית מקרקעין, מנהלת פיתוח עסקי ובקרה תקציבית
+                </p>
+              </div>
+            </motion.div>
+
+            {/* טלי אלבז - שיווק וקשרי לקוחות */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              whileHover={{ y: -8 }}
+              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
+            >
+              <div className="aspect-[3/4] overflow-hidden bg-gray-100">
+                <img 
+                  src="https://res.cloudinary.com/dmabeivkl/image/upload/w_800,fl_lossy,f_auto/v1610525074/profile-image/e0gppkaamsley3y4r5wf.jpg"
+                  alt="טלי אלבז"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6 text-center border-t-2 border-accent-gold">
+                <h3 className="text-xl font-bold text-primary mb-2">
+                  טלי אלבז
+                </h3>
+                <p className="text-gray-600">
+                  שיווק וקשרי לקוחות
+                </p>
+              </div>
+            </motion.div>
+
+            {/* אלון מעטוף - סמנכ"ל ביצוע */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              whileHover={{ y: -8 }}
+              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
+            >
+              <div className="aspect-[3/4] bg-gradient-to-br from-primary via-primary-light to-accent-gold/20 flex items-center justify-center relative overflow-hidden">
+                {/* Background pattern */}
+                <div className="absolute inset-0 opacity-10">
+                  <div className="absolute inset-0" style={{
+                    backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+                    backgroundSize: '24px 24px'
+                  }} />
+                </div>
+                
+                {/* Icon */}
+                <div className="relative z-10">
+                  <div className="w-32 h-32 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border-4 border-white/30">
+                    <Building2 className="w-16 h-16 text-white" strokeWidth={1.5} />
+                  </div>
+                </div>
+              </div>
+              <div className="p-6 text-center border-t-2 border-accent-gold">
+                <h3 className="text-xl font-bold text-primary mb-2">
+                  אלון מעטוף
+                </h3>
+                <p className="text-gray-600">
+                  סמנכ"ל ביצוע
+                </p>
+              </div>
+            </motion.div>
+
+            {/* כרטיסי עובדים נוספים יתווספו כאן */}
+            
+          </div>
         </div>
       </section>
     </div>
