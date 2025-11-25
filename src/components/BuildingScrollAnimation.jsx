@@ -86,8 +86,8 @@ const BuildingScrollUltraRealistic = () => {
   );
 
   // Image reveal effect
-  const imageScale = useTransform(smoothProgress, [0, 1], [1.2, 1]);
-  const imageOpacity = useTransform(smoothProgress, [0, 0.1, 0.9, 1], [0.5, 1, 1, 1]);
+  const imageScale = useTransform(smoothProgress, [0, 1], [1.1, 1]);
+  const imageOpacity = useTransform(smoothProgress, [0, 0.1, 0.9, 1], [1, 1, 1, 1]);
 
   // 3D perspective effect
   const rotateX = useTransform(smoothProgress, [0, 0.5, 1], [5, 0, -5]);
@@ -121,9 +121,9 @@ const BuildingScrollUltraRealistic = () => {
                 
                 {/* Eshkol Logo */}
                 <motion.div
-                  initial={{ opacity: 0 }}
+                  initial={{ opacity: 1 }}
                   animate={{ opacity: 1 }}
-                  transition={{ duration: 1 }}
+                  transition={{ duration: 0.5 }}
                   className="flex justify-end mb-12"
                 >
                   <motion.img 
@@ -145,9 +145,9 @@ const BuildingScrollUltraRealistic = () => {
                 {/* Phase info card */}
                 <motion.div
                   key={currentPhase.title}
-                  initial={{ opacity: 0, x: 50 }}
+                  initial={{ opacity: 1, x: 0 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
                   className="bg-white/95 backdrop-blur-xl rounded-3xl p-10 shadow-2xl border border-gray-100 relative overflow-hidden"
                 >
                   {/* Accent line */}
@@ -159,17 +159,17 @@ const BuildingScrollUltraRealistic = () => {
                     <div>
                       <motion.h2 
                         className="text-5xl lg:text-6xl font-bold text-primary mb-3 leading-tight"
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 1, y: 0 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
+                        transition={{ delay: 0 }}
                       >
                         {currentPhase.title}
                       </motion.h2>
                       <motion.p 
                         className="text-xl text-gray-600"
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 1, y: 0 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 }}
+                        transition={{ delay: 0 }}
                       >
                         {currentPhase.subtitle}
                       </motion.p>
@@ -287,14 +287,14 @@ const BuildingScrollUltraRealistic = () => {
                   {/* Current phase image */}
                   <motion.div
                     key={currentPhase.image}
-                    initial={{ opacity: 0, scale: 1.1 }}
+                    initial={{ opacity: 1, scale: 1 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl"
                     style={{
                       scale: imageScale,
-                      opacity: imageOpacity
+                      opacity: 1
                     }}
                   >
                     {/* The actual building image */}
@@ -313,9 +313,9 @@ const BuildingScrollUltraRealistic = () => {
                     {/* Phase label on image */}
                     <div className="absolute bottom-0 left-0 right-0 p-8">
                       <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 1, y: 0 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 }}
+                        transition={{ delay: 0 }}
                         className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20"
                       >
                         <div className="text-white text-right">
