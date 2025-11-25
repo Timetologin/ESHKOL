@@ -119,18 +119,6 @@ const Footer = () => {
                   >
                     052-8445566
                   </a>
-                  <a 
-                    href="tel:0527847101" 
-                    className="text-white/80 hover:text-accent-gold transition-colors duration-300 block"
-                  >
-                    052-7847101
-                  </a>
-                  <a 
-                    href="tel:0507107119" 
-                    className="text-white/80 hover:text-accent-gold transition-colors duration-300 block"
-                  >
-                    050-7107119
-                  </a>
                 </div>
               </li>
               <li className="flex items-center gap-3">
@@ -156,7 +144,7 @@ const Footer = () => {
         <div className="border-t border-white/10 pt-8 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/60">
             <div>
-              © 2025 Josh Ggman. כל הזכויות שמורות.
+              © 2025 Josh GGman. כל הזכויות שמורות.
             </div>
             <div className="flex gap-2">
               <span>עיצוב ופיתוח:</span>
@@ -166,7 +154,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="text-accent-gold hover:text-accent-gold/80 transition-colors duration-300"
               >
-                Josh Ggman
+                Josh GGman
               </a>
             </div>
           </div>
