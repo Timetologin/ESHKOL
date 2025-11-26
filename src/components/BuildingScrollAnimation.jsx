@@ -258,7 +258,8 @@ const BuildingScrollAnimation = () => {
               </motion.div>
 
               {/* Left side - REALISTIC Building Display (3 columns on desktop) */}
-              <div className="lg:col-span-3 relative h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-screen flex items-center justify-center order-1 lg:order-2">
+              {/* במובייל: התמונה למעלה עם גובה 55vh כדי שתהיה גדולה ובולטת */}
+              <div className="lg:col-span-3 relative h-[55vh] sm:h-[60vh] md:h-[70vh] lg:h-screen flex items-center justify-center order-1 lg:order-2">
                 
                 {/* Main image container with 3D perspective - RESPONSIVE */}
                 <motion.div
